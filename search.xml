@@ -37,12 +37,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> Mac </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -152,7 +146,7 @@
       
         <tags>
             
-            <tag> GreenCloud </tag>
+            <tag> HK </tag>
             
         </tags>
       
@@ -221,9 +215,7 @@
       
         <tags>
             
-            <tag> BBR </tag>
-            
-            <tag> 编译 </tag>
+            <tag> 编译安装 </tag>
             
         </tags>
       
@@ -298,9 +290,9 @@
       
         <tags>
             
-            <tag> Linux </tag>
+            <tag> 编译安装 </tag>
             
-            <tag> 编译 </tag>
+            <tag> Linux </tag>
             
         </tags>
       
@@ -323,12 +315,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> IDM </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -350,7 +336,7 @@
       
         <tags>
             
-            <tag> GCP </tag>
+            <tag> HK </tag>
             
         </tags>
       
@@ -423,14 +409,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> UK </tag>
-            
-            <tag> V.PS </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -494,6 +472,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> HK </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -512,6 +496,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> HK </tag>
+            
+        </tags>
       
     </entry>
     
@@ -533,8 +523,6 @@
       
       
         <tags>
-            
-            <tag> 搬瓦工 </tag>
             
             <tag> Bandwagon </tag>
             
@@ -673,6 +661,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> HK </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -803,8 +797,6 @@
       
         <tags>
             
-            <tag> Nginx </tag>
-            
             <tag> 编译安装 </tag>
             
         </tags>
@@ -828,6 +820,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> HK </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -848,8 +846,6 @@
       
       
         <tags>
-            
-            <tag> 搬瓦工 </tag>
             
             <tag> Bandwagon </tag>
             
