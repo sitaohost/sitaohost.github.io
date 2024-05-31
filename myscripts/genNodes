@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# 获取用户输入
+read -p "请输入节点数量: " node_count
+read -p "请输入 UUID: " uuid
+read -p "请输入域名或者 IP: " domain_or_ip
+read -p "请输入城市名称: " city_name
+
+# 设置初始端口和节点计数
+read -p "起始端口:" port 
+read -p "起始节点编号:" node_index
+
+# 清空节点文件
+> /root/nodes
+
+# 循环生成节点链接并输出到文件
+for ((i=1; i<=node_count; i++))
+do
+    # 生成节点名称，格式为 "城市 序号 optimize"
+
+     node_name="${city_name}$(printf "%02d" $node_index) 优化"
+
+    # 生成节点链接
+
+    node_link="vless://${uuid}@${domain_or_ip}:${port}?security=none#${node_name}"
+    # 输出节点链接到文件
+    echo "$node_link" >> /root/nodes
+
+    # 增加端口和节点计数
+    ((port++))
+    ((node_index++))
+done
+cat nodes
+echo "节点已成功输出到 /root/nodes 文件中。"
+

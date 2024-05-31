@@ -1,0 +1,75 @@
+#!/bin/bash
+
+clear
+gost_path="/gost/gost"
+
+if [ -f "$gost_path" ]; then
+  echo "gost 已存在，无需安装。"
+  systemctl stop gost
+  cd /gost
+else
+echo "开始安装gost"
+mkdir /gost && cd /gost
+wget http://dl.sitao.org/project/gost-linux-amd64-2.11.5.gz
+gzip -d gost-linux-amd64-2.11.5.gz
+mv gost-linux-amd64-2.11.5 gost
+cp gost /usr/bin/gost
+chmod +x /usr/bin/gost
+cat << EOF > /etc/systemd/system/gost.service
+[Unit]
+Description=Gost Service
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=gost -C /gost/gost.client
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable gost
+echo "gost安装成功"
+fi
+
+read -p "节点数量： " number
+
+if ! [[ $number =~ ^[0-9]+$ ]]; then
+  echo "请输入有效的数字。"
+  exit 1
+fi
+read -p "输入落地节点起始端口:" base_port
+
+config_file="gost.client"
+
+# 清空配置文件
+echo "{" > "$config_file"
+echo '    "Debug": true,' >> "$config_file"
+echo '    "Retries": 3,' >> "$config_file"
+echo '    "ServeNodes": [' >> "$config_file"
+
+# 循环生成节点配置
+for ((i = 0; i < number; i++)); do
+  serve_port=$((9000 + i))
+  relay_port=$((base_port + i))
+  echo '        "relay+tls://:'"$serve_port"'/127.0.0.1:'"$relay_port"'"' >> "$config_file"
+  if [[ $i -ne $((number - 1)) ]]; then
+    echo "," >> "$config_file"
+  fi
+done
+
+# 添加完整配置格式
+echo '    ]' >> "$config_file"
+echo "}" >> "$config_file"
+
+echo "已生成配置文件 $config_file。"
+
+systemctl start gost
+systemctl status gost
+
