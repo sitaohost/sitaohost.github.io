@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat << EOF >> /etc/sysctl.conf
+cat << EOF > /etc/sysctl.conf
 net.core.default_qdisc = fq_codel
 net.ipv4.tcp_congestion_control = bbr
 net.core.rmem_max=30720000
