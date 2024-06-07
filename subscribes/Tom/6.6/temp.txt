@@ -1,0 +1,1 @@
+vless://b06aea8b-f48d-4410-8630-62f9b3d85a8f@38.207.170.164:57866?encryption=none&flow=xtls-rprx-vision&security=reality&sni=learn.microsoft.com&fp=chrome&pbk=hv3lfVv1zNm5Nk13g_QBRnaM53gZc3OT9xNlpcq1vXk&sid=1153456789abcdef&type=tcp&headerType=none#CMIN2
