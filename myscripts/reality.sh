@@ -59,6 +59,11 @@ if [ "$os" = "Arch Linux" ]; then
 	pacman -S --noconfirm wget curl unzip socat cron
 		if [ "$local_web" = "1" ]; then
 			pacman -S --noconfirm nginx
+			CONFIG_LINES="
+			include /etc/nginx/conf.d/*.conf;
+    		types_hash_max_size 4096;
+			"
+			sed '/^http {/{:a;N;/}/!ba;s//\n'"$CONFIG_LINES"'&/}' /etc/nginx/nginx.conf
 			nginx -V
 		fi
 else 
@@ -144,6 +149,7 @@ if `test -s /xray/tls/server.crt`
         exit
 fi
 
+mkdir -p /etc/nginx/conf.d/
 cat << EOF > /etc/nginx/conf.d/reality.conf
 server {
     listen 127.0.0.1:16969 ssl http2;
@@ -203,8 +209,7 @@ cat << EOF > /xray/config.json
 		}
 	}],
 	"outbounds": [{
-			"protocol": "freedom",
-			"tag": "direct"
+			"protocol": "freedom"
 		}
 	]
 }
