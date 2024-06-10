@@ -1,0 +1,65 @@
+#!/bin/bash
+
+pacman -S unzip 
+mkdir /xray
+chmod 777 /xray
+wget https://github.com/XTLS/Xray-core/releases/download/v1.8.13/Xray-linux-64.zip
+unzip Xray-linux-64.zip -d /xray
+cp /xray/xray /usr/bin/xray
+
+cat << EOF > /etc/systemd/system/xray.service
+[Unit]
+Description=Xray Service
+Documentation=https://github.com/xtls
+After=network.target nss-lookup.target
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/xray/xray run -config /xray/config.json
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat << EOF > /xray/config.json
+{
+   
+"inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 8080,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "a88a3215-bd09-4907-868d-54d488e067e1"
+                    }
+                ],
+                "decryption":"none"
+            },
+            "streamSettings": {
+                "network": "ws",
+		"wsSettings": {
+          		"path": "/daiyu/public/2024/03/15/20240315_Y2hlYXRnZnc=233.mp4"
+        },
+                "security": "none"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
+}
+EOF
+
+systemctl start xray.service
+systemctl enable xray.service
+systemctl status xray.service
+
