@@ -59,12 +59,25 @@ if [ "$os" = "Arch Linux" ]; then
 	pacman -S --noconfirm wget curl unzip socat cron
 		if [ "$local_web" = "1" ]; then
 			pacman -S --noconfirm nginx
-			CONFIG_LINES="
-			include /etc/nginx/conf.d/*.conf;
-    		types_hash_max_size 4096;
-			"
-			sed '/^http {/{:a;N;/}/!ba;s//\n'"$CONFIG_LINES"'&/}' /etc/nginx/nginx.conf
 			nginx -V
+			insert_conf="    include /etc/nginx/conf.d/*.conf;\n    types_hash_max_size 4096;"
+	awk -v insert="$insert_conf" '
+    BEGIN { http_found = 0 }
+    /http\s*{/ { 
+        http_found = 1 
+        print
+        print insert
+        next
+    }
+    { print }
+    END {
+        if (http_found == 0) {
+            print "Error: http{} block not found."
+            exit 1
+        }
+    }
+' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp
+
 		fi
 else 
 	apt install wget curl unzip socat cron -y > /dev/null 2>&1
