@@ -27,7 +27,6 @@ fi
 
 echo "当前操作系统: $os"
 echo
-echo
 read -p "偷自己的域名吗？[y/n](默认y):" check
 
 if [ -z "$check" ] || [ "$check" = "y" ] 
