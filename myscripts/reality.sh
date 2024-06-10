@@ -57,13 +57,13 @@ read
 # pacman -S --noconfirm wget curl unzip socat cron > /dev/null 2>&1
 if [ "$os" = "Arch Linux" ]; then
 	pacman -S --noconfirm wget curl unzip socat cron
-		if [ "$local_web" = "1" ] then
+		if [ "$local_web" = "1" ]; then
 			pacman -S --noconfirm nginx
 			nginx -V
 		fi
 else 
 	apt install wget curl unzip socat cron -y > /dev/null 2>&1
-		if [ "$local_web" = "1" ] then
+		if [ "$local_web" = "1" ]; then
 			apt install nginx -y
 			nginx -V
 		fi
