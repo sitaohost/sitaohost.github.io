@@ -9,12 +9,6 @@ echo "$SSH_PUBLIC_KEY" > ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 chmod 700 ~/.ssh
 
-sudo cat << EOF > /etc/ssh/sshd_config.d/ssh.conf
-PermitRootLogin no
-PubkeyAuthentication yes
-PasswordAuthentication no
-EOF
-
 sudo systemctl restart sshd
 
 echo "SSH密钥已添加并且密码登录已禁用"
