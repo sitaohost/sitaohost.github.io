@@ -46,19 +46,19 @@ https://sitao.org/VPS/Misaka%20HK%20Optimized.html
 https://sitao.org/VPS/v.ps-London-9929.html
 https://sitao.org/
 https://sitao.org/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/
-https://sitao.org/tags/DMIT/
 https://sitao.org/tags/HK/
 https://sitao.org/tags/Bandwagon/
+https://sitao.org/tags/DMIT/
 https://sitao.org/tags/VPS/
 https://sitao.org/tags/Linux/
 https://sitao.org/tags/archlinux/
 https://sitao.org/tags/Debian/
 https://sitao.org/tags/iRedMail/
+https://sitao.org/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/
 https://sitao.org/categories/Linux/
+https://sitao.org/categories/VPS/
 https://sitao.org/categories/OS/
 https://sitao.org/categories/Docker/
-https://sitao.org/categories/VPS/
-https://sitao.org/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/
 https://sitao.org/categories/%E5%88%86%E4%BA%AB/
 https://sitao.org/categories/Python/
 
