@@ -8,7 +8,7 @@ chmod +x /snell/snell-server
 cat << EOF >/snell/snell-server.conf
 [snell-server]
 listen = 0.0.0.0:57866
-psk = AIjHCeos15IvqDZTb1cJMX5GcgZzIVE
+psk = cheatgfw233
 ipv6 = false
 EOF
 
