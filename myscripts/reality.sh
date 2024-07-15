@@ -88,10 +88,10 @@ else
 fi
 
 
-echo "安装Xray，版本：1.8.16"
+echo "安装Xray，版本：1.8.18"
 mkdir /xray
 chmod 777 /xray
-wget https://github.com/XTLS/Xray-core/releases/download/v1.8.16/Xray-linux-64.zip
+wget https://github.com/XTLS/Xray-core/releases/download/v1.8.18/Xray-linux-64.zip
 unzip Xray-linux-64.zip -d /xray
 cp /xray/xray /usr/bin/xray
 id=`xray uuid`
@@ -165,7 +165,8 @@ fi
 mkdir -p /etc/nginx/conf.d/
 cat << EOF > /etc/nginx/conf.d/reality.conf
 server {
-    listen 127.0.0.1:16969 ssl http2;
+    listen 127.0.0.1:16969 ssl;
+	http2 on;
     server_name $domain;
     error_page 497 https://\$host:16969\$request_uri;
 
