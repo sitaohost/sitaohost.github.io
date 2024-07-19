@@ -1,3 +1,4 @@
+https://sitao.org/uncategorized/arch-python3-install.html
 https://sitao.org/Linux/archlinux-install-2.html
 https://sitao.org/uncategorized/shell-string-operation.html
 https://sitao.org/Linux/archlinux-install.html
@@ -10,7 +11,6 @@ https://sitao.org/Linux/alist.html
 https://sitao.org/VPS/iredmail.html
 https://sitao.org/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp_send&recv.html
 https://sitao.org/Python/python3_install.html
-https://sitao.org/Python/arch_python3_install.html
 https://sitao.org/%E5%88%86%E4%BA%AB/idm.html
 https://sitao.org/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/127.0.0.1&0.0.0.0.html
 https://sitao.org/VPS/219.html
@@ -57,6 +57,7 @@ https://sitao.org/tags/archlinux/
 https://sitao.org/tags/Debian/
 https://sitao.org/tags/iRedMail/
 https://sitao.org/tags/shell/
+https://sitao.org/tags/Python/
 https://sitao.org/categories/Docker/
 https://sitao.org/categories/OS/
 https://sitao.org/categories/Linux/

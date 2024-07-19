@@ -5,18 +5,18 @@
     
     <entry>
       <title>ArchLinux 编译安装 Python 3</title>
-      <link href="/Python/arch_python3_install.html"/>
-      <url>/Python/arch_python3_install.html</url>
+      <link href="/uncategorized/arch-python3-install.html"/>
+      <url>/uncategorized/arch-python3-install.html</url>
       
         <content type="html"><![CDATA[<p>以3.12.4版本为例<br>在root用户下进行</p><h2 id="1-安装编译所需的依赖项"><a href="#1-安装编译所需的依赖项" class="headerlink" title="1.安装编译所需的依赖项"></a><strong>1.安装编译所需的依赖项</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S gcc make pkg-config</span><br></pre></td></tr></table></figure><h2 id="2-下载并解压-Python-源代码"><a href="#2-下载并解压-Python-源代码" class="headerlink" title="2.下载并解压 Python 源代码"></a><strong>2.下载并解压 Python 源代码</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tar.xz</span><br><span class="line">tar -xvf Python-3.12.4.tar.xz</span><br><span class="line"><span class="built_in">cd</span> Python-3.12.4/</span><br></pre></td></tr></table></figure><h2 id="3-配置编译选项"><a href="#3-配置编译选项" class="headerlink" title="3.配置编译选项"></a><strong>3.配置编译选项</strong></h2><p>运行 configure 脚本配置编译选项，这里我们启用优化并设置安装路径：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --enable-optimizations --prefix=/usr/local/python3</span><br></pre></td></tr></table></figure><h2 id="4-编译并安装-Python"><a href="#4-编译并安装-Python" class="headerlink" title="4.编译并安装 Python"></a><strong>4.编译并安装 Python</strong></h2><p>运行以下命令进行编译并安装 Python</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j$(<span class="built_in">nproc</span>) &amp;&amp; make install</span><br></pre></td></tr></table></figure><h2 id="5-更新环境变量"><a href="#5-更新环境变量" class="headerlink" title="5.更新环境变量"></a><strong>5.更新环境变量</strong></h2><p>为了在终端中能够直接使用新安装的 Python，需要将其路径添加到环境变量中。运行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PATH=\$PATH:/usr/local/python3/bin&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure><h2 id="6-验证安装"><a href="#6-验证安装" class="headerlink" title="6.验证安装"></a><strong>6.验证安装</strong></h2><p>最后，验证 Python 是否成功安装。运行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 --version</span><br></pre></td></tr></table></figure><p>如果一切顺利，你将会看到安装的 Python 版本信息。</p>]]></content>
       
       
-      <categories>
-          
-          <category> Python </category>
-          
-      </categories>
       
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
       
     </entry>
     
