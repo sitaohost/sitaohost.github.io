@@ -1,172 +1,268 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sitao</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/photo.ico"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.13.4"><!-- inject head--><link rel="canonical" href="https://sitao.org/"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="唯实惟新 至诚致志"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Sitao"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/photo.ico"><link rel="apple-touch-icon" href="/img/photo.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.13.4' + ' %c https://github.com/everfu/hexo-theme-solitude',
-    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
-    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
-    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
-</script><script>(()=>{
-        const saveToLocal = {
-            set: function setWithExpiry(key, value, ttl) {
-                if (ttl === 0)
-                    return
-                const now = new Date()
-                const expiryDay = ttl * 86400000
-                const item = {
-                    value: value,
-                    expiry: now.getTime() + expiryDay
-                }
-                localStorage.setItem(key, JSON.stringify(item))
-            },
-            get: function getWithExpiry(key) {
-                const itemStr = localStorage.getItem(key)
-    
-                if (!itemStr) {
-                    return undefined
-                }
-                const item = JSON.parse(itemStr)
-                const now = new Date()
-    
-                if (now.getTime() > item.expiry) {
-                    localStorage.removeItem(key)
-                    return undefined
-                }
-                return item.value
-            }
-        };
-        window.utils = {
-            saveToLocal: saveToLocal,
-            getCSS: (url, id = false) => new Promise((resolve, reject) => {
-              const link = document.createElement('link')
-              link.rel = 'stylesheet'
-              link.href = url
-              if (id) link.id = id
-              link.onerror = reject
-              link.onload = link.onreadystatechange = function() {
-                const loadState = this.readyState
-                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-                link.onload = link.onreadystatechange = null
-                resolve()
-              }
-              document.head.appendChild(link)
-            }),
-            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-              const script = document.createElement('script')
-              script.src = url
-              script.async = true
-              script.onerror = reject
-              script.onload = script.onreadystatechange = function() {
-                const loadState = this.readyState
-                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-                script.onload = script.onreadystatechange = null
-                resolve()
-              }
-    
-              Object.keys(attr).forEach(key => {
-                script.setAttribute(key, attr[key])
-              })
-    
-              document.head.appendChild(script)
-            }),
-            addGlobalFn: (key, fn, name = false, parent = window) => {
-                const globalFn = parent.globalFn || {}
-                const keyObj = globalFn[key] || {}
-        
-                if (name && keyObj[name]) return
-        
-                name = name || Object.keys(keyObj).length
-                keyObj[name] = fn
-                globalFn[key] = keyObj
-                parent.globalFn = globalFn
-            },
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Sitao</title><meta name="author" content="Sitao"><meta name="copyright" content="Sitao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="唯实惟新 至诚致志"><link rel="shortcut icon" href="/img/photo.ico"><link rel="canonical" href="https://sitao.org/"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Sitao',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-25 14:43:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
-    root: '/',
-    algolia: undefined,
-    localsearch: undefined,
-    runtime: '2023-04-20 00:00:00',
-    lazyload: {
-        enable: false,
-        error: '/img/error_load.avif'
-    },
-    copyright: {"limit":50,"author":"作者: Sitao","link":"链接: ","source":"来源: Sitao","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
-    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
-    randomlink: false,
-    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
-    aside: {
-        sayhello: {
-            morning: '一日之计在于晨',
-            noon: '吃饱了才有力气干活',
-            afternoon: '集中精力，攻克难关',
-            night: '不要太劳累了，早睡更健康',
-            goodnight: '睡个好觉，保证精力充沛',
-        },
-        sayhello2: [],
-        sayhello3: {
-            prefix: '好久不见，',
-            back: '欢迎再次回来，',
-        },
-    },
-    covercolor: {
-        enable: false
-    },
-    comment: false,
-    lightbox: 'null',
-    post_ai: false,
-    right_menu: false,
-    lure: false,
-    expire: false,
-};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
-    is_post: false,
-    is_page: false,
-    is_home: true,
-    page: 'solitude',
-    toc: false,
-    comment: false,
-    ai_text: false
-}</script><meta name="generator" content="Hexo 7.2.0"></head><body id="body" data-type="solitude"><!-- universe--><canvas id="universe"></canvas><!-- background img--><!-- loading--><!-- console--><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/HK/">HK<sup>7</sup></a><a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">编译安装<sup>5</sup></a><a href="/tags/Bandwagon/">Bandwagon<sup>2</sup></a><a href="/tags/DMIT/">DMIT<sup>2</sup></a><a href="/tags/VPS/">VPS<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>3</sup></a><a href="/tags/Python/">Python<sup>1</sup></a><a href="/tags/archlinux/">archlinux<sup>4</sup></a><a href="/tags/Debian/">Debian<sup>2</sup></a><a href="/tags/iRedMail/">iRedMail<sup>1</sup></a><a href="/tags/shell/">shell<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">Solitude</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Sitao</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="home"><div id="category-bar"><div class="category-bar-items home" id="category-bar-items"><div class="category-bar-item select" id="category-bar-home"><a href="/">推荐</a></div><div class="category-bar-item"><a href="/archives/">全部文章</a></div><div class="category-bar-item" id="计算机网络"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="category-bar-item" id="VPS"><a href="/categories/VPS/">VPS</a></div><div class="category-bar-item" id="Linux"><a href="/categories/Linux/">Linux</a></div><div class="category-bar-item" id="OS"><a href="/categories/OS/">OS</a></div><div class="category-bar-item" id="Docker"><a href="/categories/Docker/">Docker</a></div><div class="category-bar-item" id="分享"><a href="/categories/%E5%88%86%E4%BA%AB/">分享</a></div><div class="category-bar-item" id="Python"><a href="/categories/Python/">Python</a></div></div><div class="category-bar-right"><a class="category-bar-more" href="/categories/">更多</a></div></div><div class="recent-posts" id="recent-posts"><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/archlinux-install.html')"><div class="post_cover"><a href="/Linux/archlinux-install.html" title="云服务器/VPS 安装Arch Linux"><img class="post_bg" src="/img/default.avif" alt="云服务器/VPS 安装Arch Linux"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/archlinux-install.html">未读</a></div><a class="article-title" href="/Linux/archlinux-install.html" title="云服务器/VPS 安装Arch Linux">云服务器/VPS 安装Arch Linux</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/archlinux/" onclick="event.stopPropagation();"><span class="tags-punctuation">archlinux</span></a></span><span class="post-meta-date"><time datetime="2024-06-10T02:19:12.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/bbrv3.html')"><div class="post_cover"><a href="/Linux/bbrv3.html" title="Debian 11 手动编译Google BBR v3内核"><img class="post_bg" src="/img/default.avif" alt="Debian 11 手动编译Google BBR v3内核"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/bbrv3.html">未读</a></div><a class="article-title" href="/Linux/bbrv3.html" title="Debian 11 手动编译Google BBR v3内核">Debian 11 手动编译Google BBR v3内核</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" onclick="event.stopPropagation();"><span class="tags-punctuation">编译安装</span></a></span><span class="post-meta-date"><time datetime="2023-09-17T13:35:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/installDebian.html')"><div class="post_cover"><a href="/VPS/installDebian.html" title="自制 Debian dd系统脚本"><img class="post_bg" src="/img/default.avif" alt="自制 Debian dd系统脚本"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/installDebian.html">未读</a></div><a class="article-title" href="/VPS/installDebian.html" title="自制 Debian dd系统脚本">自制 Debian dd系统脚本</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Debian/" onclick="event.stopPropagation();"><span class="tags-punctuation">Debian</span></a></span><span class="post-meta-date"><time datetime="2024-02-01T11:03:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/uncategorized/arch-python3-install.html')"><div class="post_cover"><a href="/uncategorized/arch-python3-install.html" title="ArchLinux 编译安装 Python 3"><img class="post_bg" src="/img/default.avif" alt="ArchLinux 编译安装 Python 3"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">最新</span><a class="unvisited-post" href="/uncategorized/arch-python3-install.html">未读</a></div><a class="article-title" href="/uncategorized/arch-python3-install.html" title="ArchLinux 编译安装 Python 3">ArchLinux 编译安装 Python 3</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Python/" onclick="event.stopPropagation();"><span class="tags-punctuation">Python</span></a></span><span class="post-meta-date"><time datetime="2024-07-19T00:57:22.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/uncategorized/shell-string-operation.html')"><div class="post_cover"><a href="/uncategorized/shell-string-operation.html" title="Shell常见的字符串操作"><img class="post_bg" src="/img/default.avif" alt="Shell常见的字符串操作"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><a class="unvisited-post" href="/uncategorized/shell-string-operation.html">未读</a></div><a class="article-title" href="/uncategorized/shell-string-operation.html" title="Shell常见的字符串操作">Shell常见的字符串操作</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/shell/" onclick="event.stopPropagation();"><span class="tags-punctuation">shell</span></a></span><span class="post-meta-date"><time datetime="2024-07-16T02:53:37.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/archlinux-install-3.html')"><div class="post_cover"><a href="/Linux/archlinux-install-3.html" title="云服务器/VPS 安装Arch Linux (三)"><img class="post_bg" src="/img/default.avif" alt="云服务器/VPS 安装Arch Linux (三)"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/archlinux-install-3.html">未读</a></div><a class="article-title" href="/Linux/archlinux-install-3.html" title="云服务器/VPS 安装Arch Linux (三)">云服务器/VPS 安装Arch Linux (三)</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/archlinux/" onclick="event.stopPropagation();"><span class="tags-punctuation">archlinux</span></a></span><span class="post-meta-date"><time datetime="2024-06-09T16:57:33.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/archlinux-install-2.html')"><div class="post_cover"><a href="/Linux/archlinux-install-2.html" title="云服务器/VPS 安装Arch Linux (二)"><img class="post_bg" src="/img/default.avif" alt="云服务器/VPS 安装Arch Linux (二)"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/archlinux-install-2.html">未读</a></div><a class="article-title" href="/Linux/archlinux-install-2.html" title="云服务器/VPS 安装Arch Linux (二)">云服务器/VPS 安装Arch Linux (二)</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/archlinux/" onclick="event.stopPropagation();"><span class="tags-punctuation">archlinux</span></a></span><span class="post-meta-date"><time datetime="2024-06-09T13:14:57.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/archlinux-install-1.html')"><div class="post_cover"><a href="/Linux/archlinux-install-1.html" title="云服务器/VPS 安装Arch Linux (一)"><img class="post_bg" src="/img/default.avif" alt="云服务器/VPS 安装Arch Linux (一)"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/archlinux-install-1.html">未读</a></div><a class="article-title" href="/Linux/archlinux-install-1.html" title="云服务器/VPS 安装Arch Linux (一)">云服务器/VPS 安装Arch Linux (一)</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/archlinux/" onclick="event.stopPropagation();"><span class="tags-punctuation">archlinux</span></a></span><span class="post-meta-date"><time datetime="2024-06-09T07:27:33.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp_send&amp;recv.html')"><div class="post_cover"><a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp_send&amp;recv.html" title="TCP的发送缓冲区和接收缓冲区"><img class="post_bg" src="/img/default.avif" alt="TCP的发送缓冲区和接收缓冲区"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">计算机网络</span><a class="unvisited-post" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp_send&amp;recv.html">未读</a></div><a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp_send&amp;recv.html" title="TCP的发送缓冲区和接收缓冲区">TCP的发送缓冲区和接收缓冲区</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2024-04-15T09:07:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/%E5%88%86%E4%BA%AB/PyCharmTo2099.html')"><div class="post_cover"><a href="/%E5%88%86%E4%BA%AB/PyCharmTo2099.html" title="PyCharm专业版 一键激活到2099 MacOS"><img class="post_bg" src="/img/default.avif" alt="PyCharm专业版 一键激活到2099 MacOS"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">分享</span><a class="unvisited-post" href="/%E5%88%86%E4%BA%AB/PyCharmTo2099.html">未读</a></div><a class="article-title" href="/%E5%88%86%E4%BA%AB/PyCharmTo2099.html" title="PyCharm专业版 一键激活到2099 MacOS">PyCharm专业版 一键激活到2099 MacOS</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2024-04-08T08:59:00.000Z"></time></span></div></div></div><!-- pagination--><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><div class="pagination_tips_next">下一页</div> <i class="solitude st-arrow-right-bold"></i></a><div class="toPageGroup"><input id="toPageText" oninput="value=value.replace(/[^0-9]/g,'')" maxlength="3" title="跳转到指定页面" onkeyup="if (this.value === '0') this.value = ''"><a id="toPageButton" onclick="sco.toPage()"><i class="solitude st-show-right-line"></i></a></div></div></nav></div></div><!-- aside--><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" src="/img/photo.jpeg"><div class="avatar-sticker"><img class="avatar-sticker-img" src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">Sitao</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="webinfo"><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-folder-fill"></i><div class="item-name">文章总数 :</div></div><div class="item-count">47</div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-calendar-todo-fill"></i><div class="item-name">建站天数 :</div></div><div class="item-count" id="runtimeshow"></div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-loop-left-fill"></i><div class="item-name">最后更新 :</div></div><time class="item-count" datetime="2024-07-25T06:42:03.288Z"></time></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2024 By&nbsp;<a class="footer-bar-link" href="/">Sitao</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/js/utils.js?v=1.13.4"></script><script src="/js/main.js?v=1.13.4"></script><script src="/js/third_party/waterfall.min.js?v=1.13.4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/third_party/universe.min.js?v=1.13.4"></script><script>dark()
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
-    elements: 'a:not([target="_blank"])',
-    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
-    cacheBust: false,
-    analytics: false,
-    scrollRestoration: false
-})
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
 
-document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-})
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
 
-document.addEventListener('pjax:complete', () => {
-    window.refreshFn()
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Sitao"><img class="site-icon" src="/img/photo.jpeg"/><span class="site-name">Sitao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Sitao</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/archlinux-install.html" title="云服务器/VPS 安装Arch Linux"><i class="fas fa-thumbtack sticky"></i>云服务器/VPS 安装Arch Linux</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-10T02:19:12.000Z" title="发表于 2024-06-10 10:19:12">2024-06-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">Arch Linux以其滚动更新和极简主义而闻名，它会持续接收软件包更新，始终保持最新状态，这非常符合我的口味。而且安装和配置Arch Linux的过程本身就是一个学习和巩固Linux系统的好机会，因为从分区、文件系统设置到系统配置，都需要用户亲自动手。此外还有强大的社区支持，Arch Linux强调用户参与和贡献，其社区活跃且乐于助人，同时保持了一种独立自由的精神，不受商业利益的过多影响。
+平时主要还是使用VPS，所以我就开始研究怎么在VPS上安装Arch Linux。网上虽然有相关的教程，但不多，内容也不尽人意，于是我便开始自己研究和折腾。因为有一定的Linux基础，折腾起来也不是特别费劲，最后总结出3种实测可行的安装方式(踩了不少坑)：
+根据内存等因素划分：
+内存1.5GB以上、商家提供VNC
+云服务器&#x2F;VPS 安装Arch Linux (一)
+内存512MB以上、商家提供VNC
+云服务器&#x2F;VPS 安装Arch Linux (二)
+内存300-512MB的机器、商家不提供VNC控制台、商家VNC坏了
+云服务器&#x2F;VPS 安装Arch Linux (三) ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/bbrv3.html" title="Debian 11 手动编译Google BBR v3内核"><i class="fas fa-thumbtack sticky"></i>Debian 11 手动编译Google BBR v3内核</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-09-17T13:35:00.000Z" title="发表于 2023-09-17 21:35:00">2023-09-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">BBRv3 GitHub地址: https://github.com/google/bbr/tree/v3整个过程和之前那篇编译内核有点相似配置要求：2核2GB内存以上，硬盘空间大于20GB
+ 本次用于编译的主机配置    Processor  : AMD Ryzen 7 7700X 8-Core Processor    CPU cores  : 2 @ 4491.560 MHz    AES-NI     : ✔ Enabled    VM-x&#x2F;AMD-V : ✔ Enabled    RAM        : 1.9 GiB    Swap       : 1024.0 MiB    Disk       : 28.5 GiB    Distro     : Debian GNU&#x2F;Linux 11 (bullseye)购买链接安装依赖1apt install git build-essential libncurses-dev libssl-dev libelf-dev bison bc flex rsync debhelper screen vim -y
 
-    document.querySelectorAll('script[data-pjax]').forEach(item => {
-        const newScript = document.createElement('script')
-        const content = item.text || item.textContent || item.innerHTML || ""
-        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-        newScript.appendChild(document.createTextNode(content))
-        item.parentNode.replaceChild(newScript, item)
-    })
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/installDebian.html" title="自制 Debian dd系统脚本"><i class="fas fa-thumbtack sticky"></i>自制 Debian dd系统脚本</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-01T11:03:00.000Z" title="发表于 2024-02-01 19:03:00">2024-02-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">服务器商家提供的系统镜像虽然方便，但是其中总是包含多余的东西，我比较喜欢干净的系统，每次拿到新机器后都会进VNC控制台手动安装系统。但是手动执行系统比较费时费力，一台还好，但是我的服务器很多，一台一台地弄太慢了，把自己整的很烦躁。因此，我决定尝试使用自动化脚本来简化这一过程，提高效率。在服务器管理和运维领域，自动化脚本是节省时间和提高效率的关键。现在正好放寒假，于是我利用空闲的时间深入研究了如何使用preseed.cfg自动化部署Debian系统
+脚本已经写好：bash &lt;(curl -sL https://sitao.org/myscripts/installDebian)可选择的系统：Debian 10, 11, 12在debain或者ubuntu上运行脚本，一般在十分钟内完成，机器性能好的话可能才五六分钟,期间可以打开vnc控制台查看进度
+脚本设计1.检查权限： 脚本首先检查用户是否以 root 权限运行，以确保能够执行必要的系统操作。
+2.选择版本： 脚本提示用户选择要安装的 Debian 版本，并根据用户的选择下载相应的 netboot 文件。
+3.设置密码： 用户需要 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/uncategorized/arch-python3-install.html" title="ArchLinux 编译安装 Python 3">ArchLinux 编译安装 Python 3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-19T00:57:22.000Z" title="发表于 2024-07-19 08:57:22">2024-07-19</time></span></div><div class="content">以3.12.4版本为例在root用户下进行
+1.安装编译所需的依赖项1pacman -S gcc make pkg-config
 
-    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+2.下载并解压 Python 源代码123wget https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tar.xztar -xvf Python-3.12.4.tar.xzcd Python-3.12.4/
 
-})
+3.配置编译选项运行 configure 脚本配置编译选项，这里我们启用优化并设置安装路径：
+1./configure --enable-optimizations --prefix=/usr/local/python3
 
-document.addEventListener('pjax:error', (e) => {
-    if (e.request.status === 404) {
-        pjax.loadUrl('/404.html')
-    }
-})</script><!-- theme--><script>initTheme = () => {
-    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const cachedMode = utils.saveToLocal.get('theme');
-    if (cachedMode === undefined) {
-        const nowMode =
-            isDarkMode ? 'dark' : 'light'
-        document.documentElement.setAttribute('data-theme', nowMode);
+4.编译并安装 Python运行以下命令进行编译并安装 Python
+1make -j$(nproc) &amp;&amp; make install
+
+5.更新环境变量为了在终端中能够直接使用新安装的 Python，需要将其路径添加到环境变量中。运行以下命令：
+12echo &quot;PATH=\$PATH:/usr/local/python3/bin&quot; & ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/uncategorized/shell-string-operation.html" title="Shell常见的字符串操作">Shell常见的字符串操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-07-16T02:53:37.000Z" title="发表于 2024-07-16 10:53:37">2024-07-16</time></span></div><div class="content">字符串连接123456#!/bin/bashstr1=&quot;Hello&quot;str2=&quot;World&quot;combined=&quot;$str1 $str2&quot;echo $combined  # 输出 &quot;Hello World&quot;
+
+
+
+字符串比较可以使用&#x3D;和!&#x3D;来比较字符串：
+12345678910#!/bin/bashstr1=&quot;Hello&quot;str2=&quot;World&quot;if [ &quot;$str1&quot; = &quot;$str2&quot; ]; then    echo &quot;Strings are equal&quot;else    echo &quot;Strings are not equal&quot;fi
+
+
+
+获取字符串长度12345#!/bin/bashstr=&quot;Hello World&quot;length=$&#123;#str&#125;echo $length  # 输出 11
+
+
+
+子字符串提取可以使用${string ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/archlinux-install-3.html" title="云服务器/VPS 安装Arch Linux (三)">云服务器/VPS 安装Arch Linux (三)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-09T16:57:33.000Z" title="发表于 2024-06-10 00:57:33">2024-06-10</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">适用于:  内存300-512MB的机器、商家不提供VNC控制台、商家VNC坏了
+我随便拿了一台机器进行演示,还是预装了Debian系统
+预装其他系统也可以，我还是推荐Debian
+准备工作1. 确定启动方式：传统BIOS还是UEFI？1ls /sys/firmware/efi 
+
+如果提示No such file or directory就是传统BIOS启动，否则就是UEFI
+我这台机器是UEFI启动
+2. 确定当前系统的根分区使用df -hT命令查看
+
+可以看到根分区是/dev/vda1,即第一个硬盘的第一个分区
+3.确定是DHCP还是静态IP执行ip addr查看网卡
+如果活动网卡有dynamic字眼说明是DHCP，否则是静态IP
+如果是静态IP，把ip地址，子网掩码以及网关记下来
+我这台机器是DHCP
+准备安装环境1234cd /tmpwget http://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-x86_64.tar.zstzstd -d archlinux-bootstrap-x86_ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/archlinux-install-2.html" title="云服务器/VPS 安装Arch Linux (二)">云服务器/VPS 安装Arch Linux (二)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-09T13:14:57.000Z" title="发表于 2024-06-09 21:14:57">2024-06-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">适用于: 内存512MB以上的机器
+我将使用一台512MB内存的机器进行演示,也是预装了Debian系统
+预装其他系统也可以，我更推荐Debian
+前言从上一篇文章可以知道，整个过程中主要用到的就是airootfs文件，它一般是.sfs格式的.
+我们先看看官方ISO镜像中airootfs.sfs文件的大小：
+
+793MB的airootfs.sfs复制到2GB的内存中，完全没问题，可是对于内存低于1GB的机器，强行把793MB的airootfs.sfs文件复制到内存中进程会被kill掉。所以我就想，airootfs.sfs文件的大小再小些不就可以复制进内存了吗？于是我用archiso工具自制了ISO镜像，将整个镜像大小控制到400MB左右(镜像不断更新中)，其中airootfs.sfs才318MB，现在就可以复制进512MB的内存中了.
+
+所以第二种方法的核心步骤就是自制ISO镜像了，你可以根据官方的文档来构建，但我更推荐直接用我自制的(能帮你省不少时间)：
+archlinux-sitao-x86_64.iso
+准备工作1. 确定启动方式：传统BIOS还是UEFI？1ls /sys/fi ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/archlinux-install-1.html" title="云服务器/VPS 安装Arch Linux (一)">云服务器/VPS 安装Arch Linux (一)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-09T07:27:33.000Z" title="发表于 2024-06-09 15:27:33">2024-06-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">适用于: 内存1.5GB以上的机器
+我在Vultr 开了一台2GB的机器进行演示,预装了Debian系统
+预装其他系统也可以，我更推荐Debian
+准备工作1. 确定启动方式：传统BIOS还是UEFI？1ls /sys/firmware/efi 
+
+如果提示No such file or directory就是传统BIOS启动，否则就是UEFI
+我这台机器是UEFI启动
+2. 确定当前系统的根分区使用df -hT命令查看
+可以看到根分区是/dev/vda2,即第一个硬盘的第二个分区，在grub中表示为(hd0,2)
+3.确定是DHCP还是静态IP执行ip addr查看网卡
+如果活动网卡有dynamic字眼说明是DHCP，否则是静态IP
+如果是静态IP，把ip地址，子网掩码以及网关记下来
+我这台机器是DHCP
+下载ISO镜像前往Linux镜像网站: mirrors.edge.kernel.org下载archlinux的ISO镜像文件这里以archlinux-2024.06.01-x86_64.iso为例
+
+使用ssh工具连接你的VPS
+12mkdir /iso &amp;&amp; cd ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp_send&amp;recv.html" title="TCP的发送缓冲区和接收缓冲区">TCP的发送缓冲区和接收缓冲区</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-15T09:07:00.000Z" title="发表于 2024-04-15 17:07:00">2024-04-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="content">TCP协议在负责端到端数据传输的过程中，其核心机制涉及到发送端和接收端的操作系统内存管理，具体包括用户空间(user space)与内核空间(kernel space)两部分。对于每一个TCP socket连接，在内核中都会配备一个发送缓冲区和一个接收缓冲区，TCP的全双工通信模式及流量控制、拥塞控制等特性正是基于这两个独立的缓冲区及其填充状态来实现的。
+在TCP socket连接的两端，分别存在send和recv两个操作函数。例如，当客户端向服务器发送数据时，客户端进程会调用send函数，该函数的作用是将待发送的数据复制到socket在其内核中的发送缓冲区。值得注意的是，当send函数执行完毕并返回时，并不代表数据已经到达服务端；实际上，send函数仅完成了从应用层缓冲区到socket内核发送缓冲区的数据复制，数据的实际发送过程由TCP协议栈负责，而非send函数直接处理。
+而在接收端，接收缓冲区用于暂存接收到的数据，直到应用程序调用recv函数进行读取为止。recv函数的主要职责是从内核缓冲区中复制数据到应用层用户指定的缓冲区，并返回已接收的数据量。若应用程序未及时调用recv读取 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/%E5%88%86%E4%BA%AB/PyCharmTo2099.html" title="PyCharm专业版 一键激活到2099 MacOS">PyCharm专业版 一键激活到2099 MacOS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-04-08T08:59:00.000Z" title="发表于 2024-04-08 16:59:00">2024-04-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E4%BA%AB/">分享</a></span></div><div class="content">首先安装专业版直达官网: https://www.jetbrains.com.cn/pycharm/download/?section=mac
+下载激活工具点击下载这个压缩包: 激活.zip
+进入下载目录,解压压缩包
+用终端进入激活工具目录执行sh pycharm.sh
+可以看见提示Success! Activate pycharm to 2099
+验证打开PyCharm，查看About PyCharm
+可以看到激活成功了
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/photo.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sitao</div><div class="author-info__description">不活在别人的评论里</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/arch-python3-install.html" title="ArchLinux 编译安装 Python 3">ArchLinux 编译安装 Python 3</a><time datetime="2024-07-19T00:57:22.000Z" title="发表于 2024-07-19 08:57:22">2024-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/shell-string-operation.html" title="Shell常见的字符串操作">Shell常见的字符串操作</a><time datetime="2024-07-16T02:53:37.000Z" title="发表于 2024-07-16 10:53:37">2024-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/archlinux-install.html" title="云服务器/VPS 安装Arch Linux">云服务器/VPS 安装Arch Linux</a><time datetime="2024-06-10T02:19:12.000Z" title="发表于 2024-06-10 10:19:12">2024-06-10</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">14</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/VPS/"><span class="card-category-list-name">VPS</span><span class="card-category-list-count">19</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E4%BA%AB/"><span class="card-category-list-name">分享</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="card-category-list-name">计算机网络</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Bandwagon/" style="font-size: 1.18em; color: #999ca1">Bandwagon</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/Linux/" style="font-size: 1.26em; color: #999fa8">Linux</a> <a href="/tags/Debian/" style="font-size: 1.18em; color: #999ca1">Debian</a> <a href="/tags/iRedMail/" style="font-size: 1.1em; color: #999">iRedMail</a> <a href="/tags/VPS/" style="font-size: 1.18em; color: #999ca1">VPS</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" style="font-size: 1.42em; color: #99a6b7">编译安装</a> <a href="/tags/DMIT/" style="font-size: 1.18em; color: #999ca1">DMIT</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/archlinux/" style="font-size: 1.34em; color: #99a3b0">archlinux</a> <a href="/tags/HK/" style="font-size: 1.5em; color: #99a9bf">HK</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">47</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-10-17T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-07-25T06:43:12.508Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Sitao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://sitao.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('/pluginsSrc/typed.js/dist/typed.umd.js').then(subtitleType)
+      }
     } else {
-        document.documentElement.setAttribute('data-theme', cachedMode);
+      subtitleType()
     }
-    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+  }
 }
-initTheme()</script><!-- google adsense--><!-- search--><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["uncategorized/arch-python3-install.html","uncategorized/shell-string-operation.html","Linux/archlinux-install.html","Linux/archlinux-install-3.html","Linux/archlinux-install-2.html","Linux/archlinux-install-1.html","计算机网络/tcp_send&recv.html","分享/PyCharmTo2099.html","Python/python3_install.html","VPS/installDebian.html","计算机网络/127.0.0.1&0.0.0.0.html","Linux/alist.html","VPS/219.html","VPS/DMIT-Tokyo-CN2-GIA.html","VPS/myfirst7950Xvps.html","Linux/bbrv3.html","VPS/iredmail.html","Linux/debian-sources.html","Linux/kernel.html","分享/idm.html","VPS/gcphk.html","Linux/installmysql 8.0.34.html","VPS/Evoxt HK.CMI.html","VPS/v.ps-London-9929.html","VPS/DMIT HK CN2-GIA.html","VPS/Misaka HK Optimized.html","VPS/RFCHOST HK.CMI.html","VPS/V.PS-HK-CMI.html","VPS/bwhtheplanv2.html","Linux/io.html","Linux/initramfs.html","OS/fork&exec.html","OS/23.html","OS/页面置换算法.html","OS/虚拟内存系统.html","VPS/Juhost HK.html","Linux/addswap.html","Linux/tar.html","OS/cs&ip.html","OS/9.html","Docker/3.html","Linux/16.html","VPS/CubeCloud-HK-CN2-GIA.html","VPS/66.html","VPS/vps-scripts.html","VPS/V.PS-au-9929.html","VPS/34.html"];function toRandomPost(){ pjax.loadUrl(GLOBAL_CONFIG.root+posts[Math.floor(Math.random()*posts.length)]); }</script>
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["尽人事，听天命","心无旁骛，万事可破"])
+  } else {
+    document.getElementById("subtitle").textContent = "尽人事，听天命"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

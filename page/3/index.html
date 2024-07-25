@@ -1,172 +1,262 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sitao</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/photo.ico"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.13.4"><!-- inject head--><link rel="canonical" href="https://sitao.org/page/3/"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="唯实惟新 至诚致志"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Sitao"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/photo.ico"><link rel="apple-touch-icon" href="/img/photo.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.13.4' + ' %c https://github.com/everfu/hexo-theme-solitude',
-    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
-    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
-    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
-</script><script>(()=>{
-        const saveToLocal = {
-            set: function setWithExpiry(key, value, ttl) {
-                if (ttl === 0)
-                    return
-                const now = new Date()
-                const expiryDay = ttl * 86400000
-                const item = {
-                    value: value,
-                    expiry: now.getTime() + expiryDay
-                }
-                localStorage.setItem(key, JSON.stringify(item))
-            },
-            get: function getWithExpiry(key) {
-                const itemStr = localStorage.getItem(key)
-    
-                if (!itemStr) {
-                    return undefined
-                }
-                const item = JSON.parse(itemStr)
-                const now = new Date()
-    
-                if (now.getTime() > item.expiry) {
-                    localStorage.removeItem(key)
-                    return undefined
-                }
-                return item.value
-            }
-        };
-        window.utils = {
-            saveToLocal: saveToLocal,
-            getCSS: (url, id = false) => new Promise((resolve, reject) => {
-              const link = document.createElement('link')
-              link.rel = 'stylesheet'
-              link.href = url
-              if (id) link.id = id
-              link.onerror = reject
-              link.onload = link.onreadystatechange = function() {
-                const loadState = this.readyState
-                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-                link.onload = link.onreadystatechange = null
-                resolve()
-              }
-              document.head.appendChild(link)
-            }),
-            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-              const script = document.createElement('script')
-              script.src = url
-              script.async = true
-              script.onerror = reject
-              script.onload = script.onreadystatechange = function() {
-                const loadState = this.readyState
-                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-                script.onload = script.onreadystatechange = null
-                resolve()
-              }
-    
-              Object.keys(attr).forEach(key => {
-                script.setAttribute(key, attr[key])
-              })
-    
-              document.head.appendChild(script)
-            }),
-            addGlobalFn: (key, fn, name = false, parent = window) => {
-                const globalFn = parent.globalFn || {}
-                const keyObj = globalFn[key] || {}
-        
-                if (name && keyObj[name]) return
-        
-                name = name || Object.keys(keyObj).length
-                keyObj[name] = fn
-                globalFn[key] = keyObj
-                parent.globalFn = globalFn
-            },
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Sitao</title><meta name="author" content="Sitao"><meta name="copyright" content="Sitao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="唯实惟新 至诚致志"><link rel="shortcut icon" href="/img/photo.ico"><link rel="canonical" href="https://sitao.org/page/3/"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Sitao',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-25 14:43:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
-    root: '/',
-    algolia: undefined,
-    localsearch: undefined,
-    runtime: '2023-04-20 00:00:00',
-    lazyload: {
-        enable: false,
-        error: '/img/error_load.avif'
-    },
-    copyright: {"limit":50,"author":"作者: Sitao","link":"链接: ","source":"来源: Sitao","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
-    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
-    randomlink: false,
-    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
-    aside: {
-        sayhello: {
-            morning: '一日之计在于晨',
-            noon: '吃饱了才有力气干活',
-            afternoon: '集中精力，攻克难关',
-            night: '不要太劳累了，早睡更健康',
-            goodnight: '睡个好觉，保证精力充沛',
-        },
-        sayhello2: [],
-        sayhello3: {
-            prefix: '好久不见，',
-            back: '欢迎再次回来，',
-        },
-    },
-    covercolor: {
-        enable: false
-    },
-    comment: false,
-    lightbox: 'null',
-    post_ai: false,
-    right_menu: false,
-    lure: false,
-    expire: false,
-};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
-    is_post: false,
-    is_page: false,
-    is_home: true,
-    page: 'solitude',
-    toc: false,
-    comment: false,
-    ai_text: false
-}</script><meta name="generator" content="Hexo 7.2.0"></head><body id="body" data-type="solitude"><!-- universe--><canvas id="universe"></canvas><!-- background img--><!-- loading--><!-- console--><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/HK/">HK<sup>7</sup></a><a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">编译安装<sup>5</sup></a><a href="/tags/Bandwagon/">Bandwagon<sup>2</sup></a><a href="/tags/DMIT/">DMIT<sup>2</sup></a><a href="/tags/VPS/">VPS<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>3</sup></a><a href="/tags/Python/">Python<sup>1</sup></a><a href="/tags/archlinux/">archlinux<sup>4</sup></a><a href="/tags/Debian/">Debian<sup>2</sup></a><a href="/tags/iRedMail/">iRedMail<sup>1</sup></a><a href="/tags/shell/">shell<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">Solitude</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Sitao</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="home"><div id="category-bar"><div class="category-bar-items home" id="category-bar-items"><div class="category-bar-item select" id="category-bar-home"><a href="/">推荐</a></div><div class="category-bar-item"><a href="/archives/">全部文章</a></div><div class="category-bar-item" id="计算机网络"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="category-bar-item" id="VPS"><a href="/categories/VPS/">VPS</a></div><div class="category-bar-item" id="Linux"><a href="/categories/Linux/">Linux</a></div><div class="category-bar-item" id="OS"><a href="/categories/OS/">OS</a></div><div class="category-bar-item" id="Docker"><a href="/categories/Docker/">Docker</a></div><div class="category-bar-item" id="分享"><a href="/categories/%E5%88%86%E4%BA%AB/">分享</a></div><div class="category-bar-item" id="Python"><a href="/categories/Python/">Python</a></div></div><div class="category-bar-right"><a class="category-bar-more" href="/categories/">更多</a></div></div><div class="recent-posts" id="recent-posts"><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/gcphk.html')"><div class="post_cover"><a href="/VPS/gcphk.html" title="GCP(谷歌云) 香港"><img class="post_bg" src="/img/default.avif" alt="GCP(谷歌云) 香港"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/gcphk.html">未读</a></div><a class="article-title" href="/VPS/gcphk.html" title="GCP(谷歌云) 香港">GCP(谷歌云) 香港</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/HK/" onclick="event.stopPropagation();"><span class="tags-punctuation">HK</span></a></span><span class="post-meta-date"><time datetime="2023-07-23T11:56:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/installmysql%208.0.34.html')"><div class="post_cover"><a href="/Linux/installmysql%208.0.34.html" title="Debian 11 编译安装mysql 8.0.34"><img class="post_bg" src="/img/default.avif" alt="Debian 11 编译安装mysql 8.0.34"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/installmysql%208.0.34.html">未读</a></div><a class="article-title" href="/Linux/installmysql%208.0.34.html" title="Debian 11 编译安装mysql 8.0.34">Debian 11 编译安装mysql 8.0.34</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" onclick="event.stopPropagation();"><span class="tags-punctuation">编译安装</span></a></span><span class="post-meta-date"><time datetime="2023-07-23T02:20:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/Evoxt%20HK.CMI.html')"><div class="post_cover"><a href="/VPS/Evoxt%20HK.CMI.html" title="Evoxt HK.CMI"><img class="post_bg" src="/img/default.avif" alt="Evoxt HK.CMI"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/Evoxt%20HK.CMI.html">未读</a></div><a class="article-title" href="/VPS/Evoxt%20HK.CMI.html" title="Evoxt HK.CMI">Evoxt HK.CMI</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/HK/" onclick="event.stopPropagation();"><span class="tags-punctuation">HK</span></a></span><span class="post-meta-date"><time datetime="2023-07-22T02:54:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/v.ps-London-9929.html')"><div class="post_cover"><a href="/VPS/v.ps-London-9929.html" title="V.PS London 9929"><img class="post_bg" src="/img/default.avif" alt="V.PS London 9929"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/v.ps-London-9929.html">未读</a></div><a class="article-title" href="/VPS/v.ps-London-9929.html" title="V.PS London 9929">V.PS London 9929</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-07-22T02:12:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/DMIT%20HK%20CN2-GIA.html')"><div class="post_cover"><a href="/VPS/DMIT%20HK%20CN2-GIA.html" title="DMIT HK CN2-GIA"><img class="post_bg" src="/img/default.avif" alt="DMIT HK CN2-GIA"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/DMIT%20HK%20CN2-GIA.html">未读</a></div><a class="article-title" href="/VPS/DMIT%20HK%20CN2-GIA.html" title="DMIT HK CN2-GIA">DMIT HK CN2-GIA</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/DMIT/" onclick="event.stopPropagation();"><span class="tags-punctuation">DMIT</span></a></span><span class="post-meta-date"><time datetime="2023-07-19T05:26:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/Misaka%20HK%20Optimized.html')"><div class="post_cover"><a href="/VPS/Misaka%20HK%20Optimized.html" title="Misaka HK Optimized"><img class="post_bg" src="/img/default.avif" alt="Misaka HK Optimized"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/Misaka%20HK%20Optimized.html">未读</a></div><a class="article-title" href="/VPS/Misaka%20HK%20Optimized.html" title="Misaka HK Optimized">Misaka HK Optimized</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-07-19T05:17:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/RFCHOST%20HK.CMI.html')"><div class="post_cover"><a href="/VPS/RFCHOST%20HK.CMI.html" title="RFCHOST HK.CMI"><img class="post_bg" src="/img/default.avif" alt="RFCHOST HK.CMI"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/RFCHOST%20HK.CMI.html">未读</a></div><a class="article-title" href="/VPS/RFCHOST%20HK.CMI.html" title="RFCHOST HK.CMI">RFCHOST HK.CMI</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/HK/" onclick="event.stopPropagation();"><span class="tags-punctuation">HK</span></a></span><span class="post-meta-date"><time datetime="2023-07-19T04:59:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/V.PS-HK-CMI.html')"><div class="post_cover"><a href="/VPS/V.PS-HK-CMI.html" title="V.PS HK CMI"><img class="post_bg" src="/img/default.avif" alt="V.PS HK CMI"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/V.PS-HK-CMI.html">未读</a></div><a class="article-title" href="/VPS/V.PS-HK-CMI.html" title="V.PS HK CMI">V.PS HK CMI</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/HK/" onclick="event.stopPropagation();"><span class="tags-punctuation">HK</span></a></span><span class="post-meta-date"><time datetime="2023-06-28T13:29:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/bwhtheplanv2.html')"><div class="post_cover"><a href="/VPS/bwhtheplanv2.html" title="搬瓦工(BandwagonHost) THE PLAN v2 限量版套餐上线！$119美元/年，17个机房可选"><img class="post_bg" src="/img/default.avif" alt="搬瓦工(BandwagonHost) THE PLAN v2 限量版套餐上线！$119美元/年，17个机房可选"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/bwhtheplanv2.html">未读</a></div><a class="article-title" href="/VPS/bwhtheplanv2.html" title="搬瓦工(BandwagonHost) THE PLAN v2 限量版套餐上线！$119美元/年，17个机房可选">搬瓦工(BandwagonHost) THE PLAN v2 限量版套餐上线！$119美元/年，17个机房可选</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Bandwagon/" onclick="event.stopPropagation();"><span class="tags-punctuation">Bandwagon</span></a></span><span class="post-meta-date"><time datetime="2023-06-27T11:55:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/io.html')"><div class="post_cover"><a href="/Linux/io.html" title="I/O模型"><img class="post_bg" src="/img/default.avif" alt="I/O模型"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/io.html">未读</a></div><a class="article-title" href="/Linux/io.html" title="I/O模型">I/O模型</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-06-27T02:48:00.000Z"></time></span></div></div></div><!-- pagination--><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/"><i class="solitude st-arrow-left-bold"></i> <div class="pagination_tips_prev">上一页</div></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><div class="pagination_tips_next">下一页</div> <i class="solitude st-arrow-right-bold"></i></a><div class="toPageGroup"><input id="toPageText" oninput="value=value.replace(/[^0-9]/g,'')" maxlength="3" title="跳转到指定页面" onkeyup="if (this.value === '0') this.value = ''"><a id="toPageButton" onclick="sco.toPage()"><i class="solitude st-show-right-line"></i></a></div></div></nav></div></div><!-- aside--><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" src="/img/photo.jpeg"><div class="avatar-sticker"><img class="avatar-sticker-img" src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">Sitao</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="webinfo"><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-folder-fill"></i><div class="item-name">文章总数 :</div></div><div class="item-count">47</div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-calendar-todo-fill"></i><div class="item-name">建站天数 :</div></div><div class="item-count" id="runtimeshow"></div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-loop-left-fill"></i><div class="item-name">最后更新 :</div></div><time class="item-count" datetime="2024-07-25T06:42:03.289Z"></time></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2024 By&nbsp;<a class="footer-bar-link" href="/">Sitao</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/js/utils.js?v=1.13.4"></script><script src="/js/main.js?v=1.13.4"></script><script src="/js/third_party/waterfall.min.js?v=1.13.4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/third_party/universe.min.js?v=1.13.4"></script><script>dark()
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
-    elements: 'a:not([target="_blank"])',
-    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
-    cacheBust: false,
-    analytics: false,
-    scrollRestoration: false
-})
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
 
-document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-})
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
 
-document.addEventListener('pjax:complete', () => {
-    window.refreshFn()
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Sitao"><img class="site-icon" src="/img/photo.jpeg"/><span class="site-name">Sitao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Sitao</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/gcphk.html" title="GCP(谷歌云) 香港">GCP(谷歌云) 香港</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-23T11:56:00.000Z" title="发表于 2023-07-23 19:56:00">2023-07-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">白嫖了GCP 300刀，开一台最低配的hk机器来测测
+IP段不同，延迟也不同，我这台是34.92.147.X
+yabs流媒体
+全国延迟
+回程路由----------------------------------------------------------------------
+北京电信
+traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets
+ 1  *
+ 2  *
+ 3  bj141-147-210.bjtelecom.net (219.141.147.210)  52.20 ms  AS4847  China, Beijing, ChinaTelecom
 
-    document.querySelectorAll('script[data-pjax]').forEach(item => {
-        const newScript = document.createElement('script')
-        const content = item.text || item.textContent || item.innerHTML || ""
-        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-        newScript.appendChild(document.createTextNode(content))
-        item.parentNode.replaceChild(newScript, item)
-    })
+----------------------------------------------------------------------
+上海电信
+traceroute to 202.96.209.133 (202.96.209.133), 30 hops max, 32 byte packets
+ 1  *
+ 2  n ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/installmysql%208.0.34.html" title="Debian 11 编译安装mysql 8.0.34">Debian 11 编译安装mysql 8.0.34</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-23T02:20:00.000Z" title="发表于 2023-07-23 10:20:00">2023-07-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">
+主机配置建议在2c2g以上
 
-    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+1.安装各种依赖apt install build-essential cmake pkg-config libssl1.1 libssl-dev libncurses5-dev libncursesw5-dev -y
 
-})
+2.下载源码wget https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-boost-8.0.34.tar.gz
 
-document.addEventListener('pjax:error', (e) => {
-    if (e.request.status === 404) {
-        pjax.loadUrl('/404.html')
-    }
-})</script><!-- theme--><script>initTheme = () => {
-    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const cachedMode = utils.saveToLocal.get('theme');
-    if (cachedMode === undefined) {
-        const nowMode =
-            isDarkMode ? 'dark' : 'light'
-        document.documentElement.setAttribute('data-theme', nowMode);
+
+如需安装其他版本可以在官方下载页找 https://downloads.mysql.com/archives/community/
+
+3.解压源码包tar -xzvf mysql-boost-8.0.34.tar.gz
+
+4.进入源码目录cd /mysql-8.0.34/
+
+5.创建build目录并进入mkdir build &amp;&amp; cd build
+
+
+在编译MySQL时创建build目录有以下好处：1.通过隔离源代码和编译输出，保持项目的组织结构清晰，便于清理和卸载生成的文件，同时支持多个构建配置。2.防止对源代码的污染，将编译过程中生成的临时文件和对象文件 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/Evoxt%20HK.CMI.html" title="Evoxt HK.CMI">Evoxt HK.CMI</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-22T02:54:00.000Z" title="发表于 2023-07-22 10:54:00">2023-07-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">上游是xTom
+本次测试的是CPU	1 vCoreRAM	512 MBStorage	5 GBMonthly Transfer 250G$2.99 USD Monthly前往官网： https://sitao.org/evoxt专属九五折优惠码: AFF684-daiyu
+测试IP: 166.88.141.1电信&#x2F;联通去程ntt,回程CMI移动双向CMI
+性能
+流媒体解锁
+
+MTR回程路由上海联通 mtr -rznT 210.22.97.1
+HOST: sitao.evoxt.com             Loss%   Snt   Last   Avg  Best  Wrst StDev
+
+AS9312   103.193.131.153      0.0%    10    2.8  29.8   1.0 134.2  49.0
+AS9312   103.193.131.92      10.0%    10    9.1  17.4   3.2  90.3  27.4
+AS9312   103.193.131.89       0.0%    10    3.0    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/v.ps-London-9929.html" title="V.PS London 9929">V.PS London 9929</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-22T02:12:00.000Z" title="发表于 2023-07-22 10:12:00">2023-07-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">本次测试的是StarterCPU2 CoresMemory1 GBSSD Storage20 GBData Transfer1 TB@1Gbps6.95 EUR &#x2F; Monthly(涨了1欧)
+官网looking glasshttps://lon.lg.v.ps/
+性能
+流媒体解锁
+回程路由北京电信traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets 1  rg01lon.v.ps (185.49.33.1)  423.22 ms  AS3214  United Kingdom, London, xtom.com 2  a5.cr01.lon08.xtom.uk (91.200.241.142)  0.65 ms  *  United Kingdom, London, xtom.com 3  162.255.48.9  4.57 ms  AS10099  United Kingdom, London, ChinaUnicom 4  162.255.48.202  17.76  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/DMIT%20HK%20CN2-GIA.html" title="DMIT HK CN2-GIA">DMIT HK CN2-GIA</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-19T05:26:00.000Z" title="发表于 2023-07-19 13:26:00">2023-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">本次测试的是PVM.HKG.Pro.TINY免設定費1 vCPU1 GB RAM20G SSD Storage400GB Transfer100Mbps VirtIO Interface1 IPv4 &amp; 1 IPv6 &#x2F;64月繳 39.90 USD
+官网测试IP: 103.117.100.20
+性能
+流媒体解锁
+
+回程路由北京电信traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets 1  premium-routing-irb-50.re.hkg.DMIT.com (193.41.248.73)  0.30 ms  AS906  China, Hong Kong, dmit.io 2  AS906.Backbone.DMIT.com (193.41.248.243)  3.21 ms  AS906  United States, California, Los Angeles, dmit.io 3  121.59.101.101  0.59 ms  *  China, ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/Misaka%20HK%20Optimized.html" title="Misaka HK Optimized">Misaka HK Optimized</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-19T05:17:00.000Z" title="发表于 2023-07-19 13:17:00">2023-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">本次测试：S3P2-1C1G1 vCore	1 GiB	16 GiB Memory716 GiB TransferPricing$21 USD &#x2F; month
+性能
+流媒体解锁
+
+回程路由北京电信traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets 1  po30.0103.hkg12.hk.misaka.io (45.11.104.9)  0.16 ms  AS57695  China, Hong Kong, misaka.io 2  * 3  cmi-v1998.cr02.hkg12.hk.misaka.io (199.119.64.208)  0.41 ms  AS969  China, Hong Kong, misaka.io 4  * 5  223.120.2.49  2.23 ms  AS58453  China, Hong Kong, ChinaMobile 6  223.120.22.106  28.04 ms  AS58453  China, Shangha ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/RFCHOST%20HK.CMI.html" title="RFCHOST HK.CMI">RFCHOST HK.CMI</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-07-19T04:59:00.000Z" title="发表于 2023-07-19 12:59:00">2023-07-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">本次测试的是HKG3-Premium-MicroCPU Core: 1内存: 512MB硬盘: 8GB SSD限速: 500Mbps流量: 500GB (仅计算出方向)IP: 1 IPv4 + &#x2F;64 IPv6
+$15.00 USD 月繳
+测试IP: 199.15.77.135
+性能
+流媒体解锁
+
+回程路由北京电信traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets 1  199.15.77.1  342.13 ms  AS140096  中国, 香港, rixcloud.com 2  10.60.0.1  1.33 ms  *  局域网 3  * 4  * 5  * 6  * 7  * 8  * 9  *10  *11  *12  *13  202.97.17.89  48.95 ms  AS4134  中国, 北京, chinatelecom.com.cn, 电信14  *15  6.254.120.106.static.bjtelecom.net (106.120.25 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/V.PS-HK-CMI.html" title="V.PS HK CMI">V.PS HK CMI</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-28T13:29:00.000Z" title="发表于 2023-06-28 21:29:00">2023-06-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">xTom 亲儿子
+本次测试机器:Starter11.95 EUR &#x2F; MonthlyCPU2 CoresMemory1 GBSSD Storage20 GBData Transfer1 TB @1Gpbs
+官网
+性能
+流媒体解锁
+回程路由北京电信traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets 1  rg01hk.v.ps (95.214.164.1)  17.97 ms  AS9312  China, Hong Kong, xtom.com 2  103.193.131.92.static.xtom.com (103.193.131.92)  1.78 ms  AS9312  China, Hong Kong, xtom.com 3  103.193.131.76.static.xtom.com (103.193.131.76)  0.49 ms  AS9312  China, Hong Kong, xtom.com 4  * 5  223.119.81.186  4. ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/bwhtheplanv2.html" title="搬瓦工(BandwagonHost) THE PLAN v2 限量版套餐上线！$119美元/年，17个机房可选">搬瓦工(BandwagonHost) THE PLAN v2 限量版套餐上线！$119美元/年，17个机房可选</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-27T11:55:00.000Z" title="发表于 2023-06-27 19:55:00">2023-06-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">
+搬瓦工今天再次上线一款全新限量版套餐，THE PLAN v2 限量版套餐，相比之前的 THE PLAN 限量版套餐，价格从 $99 涨到$119，但是流量从 1TB 变成 2TB，也就是说多花20 美元就能多得1000GB 流量。
+
+THE PLAN v2 套餐CPU：2 核
+内存：2 GB
+硬盘：40 GB SSD
+流量：2000 GB/月
+带宽：高达 2.5 Gbps
+机房：中国香港 HK85/日本软银/DC6/DC9 等
+迁移：17 个机房随意迁移
+价格：35 美元/季度，$119 美元/年
+
+可选机房:中国香港 HK85&#x2F;CMI：2.5 Gbps日本大阪软银：2.5 Gbps澳大利亚悉尼：2.5 Gbps美国新泽西州：1 Gbps美国纽约：2.5 Gbps荷兰阿姆斯特丹，EUNL_3&#x2F;i3d：1 Gbps荷兰阿姆斯特丹，EUNL_9&#x2F;中国联通：2.5 Gbps美国洛杉矶，USCA_2&#x2F;QNET：1 Gbps美国洛杉矶，USCA_3&#x2F;CN2 GT：1 Gbps美国洛杉矶，USCA_4&#x2F; MCOM：1 Gbps美国洛杉矶 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/io.html" title="I/O模型">I/O模型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-27T02:48:00.000Z" title="发表于 2023-06-27 10:48:00">2023-06-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">I&#x2F;O模型主要关注如何管理和处理输入输出操作，以确保数据能够有效地传输和处理。以下是一些常见的IO模型：
+阻塞IO模型（Blocking IO Model）：在这种模型中，当应用程序执行IO操作时，程序会一直阻塞（即暂停执行），直到操作完成。这意味着应用程序在等待IO操作完成期间无法执行其他任务。
+非阻塞IO模型（Non-blocking IO Model）：在这种模型中，应用程序可以继续执行其他任务，而无需等待IO操作完成。应用程序可以轮询或使用回调函数等方式检查IO操作的状态，并在数据准备就绪时进行读取或写入。
+多路复用IO模型（Multiplexing IO Model）：这种模型使用操作系统提供的多路复用机制（如select、poll或epoll），允许应用程序同时监视多个IO操作的状态。应用程序可以通过单个系统调用等待多个IO事件的完成，从而提高效率。
+异步IO模型（Asynchronous IO Model）：在这种模型中，应用程序发起IO操作后，不需要等待操作完成。相反，它可以继续执行其他任务，并在IO操作完成后得到通知。这种模型通常使用回调函数或事件驱动的方式 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/photo.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sitao</div><div class="author-info__description">不活在别人的评论里</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/arch-python3-install.html" title="ArchLinux 编译安装 Python 3">ArchLinux 编译安装 Python 3</a><time datetime="2024-07-19T00:57:22.000Z" title="发表于 2024-07-19 08:57:22">2024-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/shell-string-operation.html" title="Shell常见的字符串操作">Shell常见的字符串操作</a><time datetime="2024-07-16T02:53:37.000Z" title="发表于 2024-07-16 10:53:37">2024-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/archlinux-install.html" title="云服务器/VPS 安装Arch Linux">云服务器/VPS 安装Arch Linux</a><time datetime="2024-06-10T02:19:12.000Z" title="发表于 2024-06-10 10:19:12">2024-06-10</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">14</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/VPS/"><span class="card-category-list-name">VPS</span><span class="card-category-list-count">19</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E4%BA%AB/"><span class="card-category-list-name">分享</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="card-category-list-name">计算机网络</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Bandwagon/" style="font-size: 1.18em; color: #999ca1">Bandwagon</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/Linux/" style="font-size: 1.26em; color: #999fa8">Linux</a> <a href="/tags/Debian/" style="font-size: 1.18em; color: #999ca1">Debian</a> <a href="/tags/iRedMail/" style="font-size: 1.1em; color: #999">iRedMail</a> <a href="/tags/VPS/" style="font-size: 1.18em; color: #999ca1">VPS</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" style="font-size: 1.42em; color: #99a6b7">编译安装</a> <a href="/tags/DMIT/" style="font-size: 1.18em; color: #999ca1">DMIT</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/archlinux/" style="font-size: 1.34em; color: #99a3b0">archlinux</a> <a href="/tags/HK/" style="font-size: 1.5em; color: #99a9bf">HK</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">47</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-10-17T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-07-25T06:43:12.508Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Sitao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://sitao.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('/pluginsSrc/typed.js/dist/typed.umd.js').then(subtitleType)
+      }
     } else {
-        document.documentElement.setAttribute('data-theme', cachedMode);
+      subtitleType()
     }
-    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+  }
 }
-initTheme()</script><!-- google adsense--><!-- search--><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["uncategorized/arch-python3-install.html","uncategorized/shell-string-operation.html","Linux/archlinux-install.html","Linux/archlinux-install-3.html","Linux/archlinux-install-2.html","Linux/archlinux-install-1.html","计算机网络/tcp_send&recv.html","分享/PyCharmTo2099.html","Python/python3_install.html","VPS/installDebian.html","计算机网络/127.0.0.1&0.0.0.0.html","Linux/alist.html","VPS/219.html","VPS/DMIT-Tokyo-CN2-GIA.html","VPS/myfirst7950Xvps.html","Linux/bbrv3.html","VPS/iredmail.html","Linux/debian-sources.html","Linux/kernel.html","分享/idm.html","VPS/gcphk.html","Linux/installmysql 8.0.34.html","VPS/Evoxt HK.CMI.html","VPS/v.ps-London-9929.html","VPS/DMIT HK CN2-GIA.html","VPS/Misaka HK Optimized.html","VPS/RFCHOST HK.CMI.html","VPS/V.PS-HK-CMI.html","VPS/bwhtheplanv2.html","Linux/io.html","Linux/initramfs.html","OS/fork&exec.html","OS/23.html","OS/页面置换算法.html","OS/虚拟内存系统.html","VPS/Juhost HK.html","Linux/addswap.html","Linux/tar.html","OS/cs&ip.html","OS/9.html","Docker/3.html","Linux/16.html","VPS/CubeCloud-HK-CN2-GIA.html","VPS/66.html","VPS/vps-scripts.html","VPS/V.PS-au-9929.html","VPS/34.html"];function toRandomPost(){ pjax.loadUrl(GLOBAL_CONFIG.root+posts[Math.floor(Math.random()*posts.length)]); }</script>
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["尽人事，听天命","心无旁骛，万事可破"])
+  } else {
+    document.getElementById("subtitle").textContent = "尽人事，听天命"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
