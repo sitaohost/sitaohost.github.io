@@ -1,172 +1,255 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sitao</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.ico"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.13.4"><!-- inject head--><link rel="canonical" href="https://sitao.org/page/4/"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="唯实惟新 至诚致志"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Sitao"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.ico"><link rel="apple-touch-icon" href="/img/pwa/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.13.4' + ' %c https://github.com/everfu/hexo-theme-solitude',
-    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
-    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
-    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
-</script><script>(()=>{
-        const saveToLocal = {
-            set: function setWithExpiry(key, value, ttl) {
-                if (ttl === 0)
-                    return
-                const now = new Date()
-                const expiryDay = ttl * 86400000
-                const item = {
-                    value: value,
-                    expiry: now.getTime() + expiryDay
-                }
-                localStorage.setItem(key, JSON.stringify(item))
-            },
-            get: function getWithExpiry(key) {
-                const itemStr = localStorage.getItem(key)
-    
-                if (!itemStr) {
-                    return undefined
-                }
-                const item = JSON.parse(itemStr)
-                const now = new Date()
-    
-                if (now.getTime() > item.expiry) {
-                    localStorage.removeItem(key)
-                    return undefined
-                }
-                return item.value
-            }
-        };
-        window.utils = {
-            saveToLocal: saveToLocal,
-            getCSS: (url, id = false) => new Promise((resolve, reject) => {
-              const link = document.createElement('link')
-              link.rel = 'stylesheet'
-              link.href = url
-              if (id) link.id = id
-              link.onerror = reject
-              link.onload = link.onreadystatechange = function() {
-                const loadState = this.readyState
-                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-                link.onload = link.onreadystatechange = null
-                resolve()
-              }
-              document.head.appendChild(link)
-            }),
-            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-              const script = document.createElement('script')
-              script.src = url
-              script.async = true
-              script.onerror = reject
-              script.onload = script.onreadystatechange = function() {
-                const loadState = this.readyState
-                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-                script.onload = script.onreadystatechange = null
-                resolve()
-              }
-    
-              Object.keys(attr).forEach(key => {
-                script.setAttribute(key, attr[key])
-              })
-    
-              document.head.appendChild(script)
-            }),
-            addGlobalFn: (key, fn, name = false, parent = window) => {
-                const globalFn = parent.globalFn || {}
-                const keyObj = globalFn[key] || {}
-        
-                if (name && keyObj[name]) return
-        
-                name = name || Object.keys(keyObj).length
-                keyObj[name] = fn
-                globalFn[key] = keyObj
-                parent.globalFn = globalFn
-            },
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Sitao</title><meta name="author" content="Sitao"><meta name="copyright" content="Sitao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="唯实惟新 至诚致志"><link rel="shortcut icon" href="/img/photo.ico"><link rel="canonical" href="https://sitao.org/page/4/"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Sitao',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-25 14:26:57'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
-    root: '/',
-    algolia: undefined,
-    localsearch: undefined,
-    runtime: '2023-04-20 00:00:00',
-    lazyload: {
-        enable: false,
-        error: '/img/error_load.avif'
-    },
-    copyright: {"limit":50,"author":"作者: Sitao","link":"链接: ","source":"来源: Sitao","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
-    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
-    randomlink: false,
-    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
-    aside: {
-        sayhello: {
-            morning: '一日之计在于晨',
-            noon: '吃饱了才有力气干活',
-            afternoon: '集中精力，攻克难关',
-            night: '不要太劳累了，早睡更健康',
-            goodnight: '睡个好觉，保证精力充沛',
-        },
-        sayhello2: [],
-        sayhello3: {
-            prefix: '好久不见，',
-            back: '欢迎再次回来，',
-        },
-    },
-    covercolor: {
-        enable: false
-    },
-    comment: false,
-    lightbox: 'null',
-    post_ai: false,
-    right_menu: false,
-    lure: false,
-    expire: false,
-};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
-    is_post: false,
-    is_page: false,
-    is_home: true,
-    page: 'solitude',
-    toc: false,
-    comment: false,
-    ai_text: false
-}</script><meta name="generator" content="Hexo 7.2.0"></head><body id="body" data-type="solitude"><!-- universe--><canvas id="universe"></canvas><!-- background img--><!-- loading--><!-- console--><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">编译安装<sup>5</sup></a><a href="/tags/HK/">HK<sup>7</sup></a><a href="/tags/Bandwagon/">Bandwagon<sup>2</sup></a><a href="/tags/DMIT/">DMIT<sup>2</sup></a><a href="/tags/VPS/">VPS<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>3</sup></a><a href="/tags/Python/">Python<sup>1</sup></a><a href="/tags/archlinux/">archlinux<sup>4</sup></a><a href="/tags/Debian/">Debian<sup>2</sup></a><a href="/tags/iRedMail/">iRedMail<sup>1</sup></a><a href="/tags/shell/">shell<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">Solitude</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Sitao</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="home"><div id="category-bar"><div class="category-bar-items home" id="category-bar-items"><div class="category-bar-item select" id="category-bar-home"><a href="/">推荐</a></div><div class="category-bar-item"><a href="/archives/">全部文章</a></div><div class="category-bar-item" id="计算机网络"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="category-bar-item" id="Linux"><a href="/categories/Linux/">Linux</a></div><div class="category-bar-item" id="VPS"><a href="/categories/VPS/">VPS</a></div><div class="category-bar-item" id="OS"><a href="/categories/OS/">OS</a></div><div class="category-bar-item" id="Docker"><a href="/categories/Docker/">Docker</a></div><div class="category-bar-item" id="分享"><a href="/categories/%E5%88%86%E4%BA%AB/">分享</a></div><div class="category-bar-item" id="Python"><a href="/categories/Python/">Python</a></div></div><div class="category-bar-right"><a class="category-bar-more" href="/categories/">更多</a></div></div><div class="recent-posts" id="recent-posts"><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/initramfs.html')"><div class="post_cover"><a href="/Linux/initramfs.html" title="initramfs - linux 临时文件系统"><img class="post_bg" src="/img/default.avif" alt="initramfs - linux 临时文件系统"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/initramfs.html">未读</a></div><a class="article-title" href="/Linux/initramfs.html" title="initramfs - linux 临时文件系统">initramfs - linux 临时文件系统</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-06-21T17:26:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/OS/fork&amp;exec.html')"><div class="post_cover"><a href="/OS/fork&amp;exec.html" title="fork()和exec()"><img class="post_bg" src="/img/default.avif" alt="fork()和exec()"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">OS</span><a class="unvisited-post" href="/OS/fork&amp;exec.html">未读</a></div><a class="article-title" href="/OS/fork&amp;exec.html" title="fork()和exec()">fork()和exec()</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-06-08T12:17:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/OS/23.html')"><div class="post_cover"><a href="/OS/23.html" title="内部碎片和外部碎片"><img class="post_bg" src="/img/default.avif" alt="内部碎片和外部碎片"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">OS</span><a class="unvisited-post" href="/OS/23.html">未读</a></div><a class="article-title" href="/OS/23.html" title="内部碎片和外部碎片">内部碎片和外部碎片</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-06-07T14:51:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/OS/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95.html')"><div class="post_cover"><a href="/OS/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95.html" title="页面置换算法"><img class="post_bg" src="/img/default.avif" alt="页面置换算法"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">OS</span><a class="unvisited-post" href="/OS/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95.html">未读</a></div><a class="article-title" href="/OS/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95.html" title="页面置换算法">页面置换算法</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-06-05T15:24:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/OS/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F.html')"><div class="post_cover"><a href="/OS/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F.html" title="虚拟内存系统"><img class="post_bg" src="/img/default.avif" alt="虚拟内存系统"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">OS</span><a class="unvisited-post" href="/OS/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F.html">未读</a></div><a class="article-title" href="/OS/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F.html" title="虚拟内存系统">虚拟内存系统</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-06-04T10:18:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/Juhost%20HK.html')"><div class="post_cover"><a href="/VPS/Juhost%20HK.html" title="Juhost HK"><img class="post_bg" src="/img/default.avif" alt="Juhost HK"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/Juhost%20HK.html">未读</a></div><a class="article-title" href="/VPS/Juhost%20HK.html" title="Juhost HK">Juhost HK</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/HK/" onclick="event.stopPropagation();"><span class="tags-punctuation">HK</span></a></span><span class="post-meta-date"><time datetime="2023-05-27T14:36:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/addswap.html')"><div class="post_cover"><a href="/Linux/addswap.html" title="Linux添加swap交换分区(虚拟内存)"><img class="post_bg" src="/img/default.avif" alt="Linux添加swap交换分区(虚拟内存)"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/addswap.html">未读</a></div><a class="article-title" href="/Linux/addswap.html" title="Linux添加swap交换分区(虚拟内存)">Linux添加swap交换分区(虚拟内存)</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/VPS/" onclick="event.stopPropagation();"><span class="tags-punctuation">VPS</span></a><a class="article-meta__tags" href="/tags/Linux/" onclick="event.stopPropagation();"><span class="tags-punctuation">Linux</span></a></span><span class="post-meta-date"><time datetime="2023-04-29T09:44:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/tar.html')"><div class="post_cover"><a href="/Linux/tar.html" title="tar命令"><img class="post_bg" src="/img/default.avif" alt="tar命令"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/tar.html">未读</a></div><a class="article-title" href="/Linux/tar.html" title="tar命令">tar命令</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Linux/" onclick="event.stopPropagation();"><span class="tags-punctuation">Linux</span></a></span><span class="post-meta-date"><time datetime="2023-03-28T07:25:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/OS/cs&amp;ip.html')"><div class="post_cover"><a href="/OS/cs&amp;ip.html" title="CS和IP寄存器"><img class="post_bg" src="/img/default.avif" alt="CS和IP寄存器"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">OS</span><a class="unvisited-post" href="/OS/cs&amp;ip.html">未读</a></div><a class="article-title" href="/OS/cs&amp;ip.html" title="CS和IP寄存器">CS和IP寄存器</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-03-28T07:19:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/OS/9.html')"><div class="post_cover"><a href="/OS/9.html" title="影响CPU寻址能力的因素"><img class="post_bg" src="/img/default.avif" alt="影响CPU寻址能力的因素"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">OS</span><a class="unvisited-post" href="/OS/9.html">未读</a></div><a class="article-title" href="/OS/9.html" title="影响CPU寻址能力的因素">影响CPU寻址能力的因素</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-03-28T07:16:00.000Z"></time></span></div></div></div><!-- pagination--><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/"><i class="solitude st-arrow-left-bold"></i> <div class="pagination_tips_prev">上一页</div></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><div class="pagination_tips_next">下一页</div> <i class="solitude st-arrow-right-bold"></i></a><div class="toPageGroup"><input id="toPageText" oninput="value=value.replace(/[^0-9]/g,'')" maxlength="3" title="跳转到指定页面" onkeyup="if (this.value === '0') this.value = ''"><a id="toPageButton" onclick="sco.toPage()"><i class="solitude st-show-right-line"></i></a></div></div></nav></div></div><!-- aside--><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" src="/img/avatar.avif"><div class="avatar-sticker"><img class="avatar-sticker-img" src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">Sitao</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="webinfo"><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-folder-fill"></i><div class="item-name">文章总数 :</div></div><div class="item-count">47</div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-calendar-todo-fill"></i><div class="item-name">建站天数 :</div></div><div class="item-count" id="runtimeshow"></div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-loop-left-fill"></i><div class="item-name">最后更新 :</div></div><time class="item-count" datetime="2024-07-25T06:24:10.652Z"></time></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2024 By&nbsp;<a class="footer-bar-link" href="/">Sitao</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/js/utils.js?v=1.13.4"></script><script src="/js/main.js?v=1.13.4"></script><script src="/js/third_party/waterfall.min.js?v=1.13.4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/third_party/universe.min.js?v=1.13.4"></script><script>dark()
-</script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
-    elements: 'a:not([target="_blank"])',
-    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
-    cacheBust: false,
-    analytics: false,
-    scrollRestoration: false
-})
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
 
-document.querySelectorAll('script[data-pjax]').forEach(item => {
-    const newScript = document.createElement('script')
-    const content = item.text || item.textContent || item.innerHTML || ""
-    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-    newScript.appendChild(document.createTextNode(content))
-    item.parentNode.replaceChild(newScript, item)
-})
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
 
-document.addEventListener('pjax:complete', () => {
-    window.refreshFn()
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Sitao"><img class="site-icon" src="/img/photo.jpeg"/><span class="site-name">Sitao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Sitao</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/initramfs.html" title="initramfs - linux 临时文件系统">initramfs - linux 临时文件系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-21T17:26:00.000Z" title="发表于 2023-06-22 01:26:00">2023-06-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">initramfs（Initial RAM File System）是在Linux系统启动过程中使用的临时文件系统。它是一个初始阶段的根文件系统，用于在系统引导过程中提供必要的驱动程序和工具，以便能够加载真正的根文件系统并完成系统初始化。
+initramfs 的主要目的是解决在启动过程中可能遇到的问题，例如：
+1.硬件支持：某些硬件设备在启动过程中可能需要额外的驱动程序才能正常工作。initramfs 可以包含这些驱动程序，以确保系统能够正确地识别和操作硬件设备。
+2.文件系统支持：根文件系统所在的分区可能使用特定的文件系统格式，例如ext4、XFS等。initramfs 可以包含用于支持和挂载这些文件系统的模块和工具。
+3.加密和解密：如果系统的根文件系统使用了加密技术，initramfs 可以包含解密所需的工具和密钥，以便在启动过程中解密根文件系统。
+在引导过程中，引导加载程序（如GRUB）加载并解压缩 initramfs，将其加载到内存中作为根文件系统。然后，initramfs 中的初始化脚本（init script）负责执行一系列操作，例如加载必要的模块、挂载真正的根文件系统、 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/OS/fork&amp;exec.html" title="fork()和exec()">fork()和exec()</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-08T12:17:00.000Z" title="发表于 2023-06-08 20:17:00">2023-06-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/OS/">OS</a></span></div><div class="content">**fork()**是一个系统调用，用于创建一个新的进程。在调用fork()时，操作系统会创建当前进程的一个副本，这个副本被称为子进程。子进程与父进程几乎完全相同，包括代码、数据和打开的文件描述符等。
+fork()之后，父进程先执行还是子进程先执行是不确定的，取决于内核所使用的调度算法
+写时拷贝（Copy-on-Write，COW）是一种延迟复制的技术，用于优化fork()的性能和资源利用。在传统的fork()操作中，父进程的所有内存空间都会被完全复制到子进程中，这会消耗大量的时间和内存资源。而在写时拷贝机制下，操作系统并不立即复制父进程的内存，而是将父进程和子进程共享同一块物理内存页。
+当父进程或子进程试图修改这个共享的内存页时，才会触发实际的复制操作。这时，操作系统会为修改的那部分内存页创建一个副本，并将副本分配给对应的进程。这样，父进程和子进程就拥有了各自的私有内存副本。
+写时拷贝的好处在于避免了不必要的内存复制，节省了系统资源和时间。在fork()调用后，如果父进程和子进程都不修改共享的内存页，那么实际上没有进行任何复制操作，它们会继续共享同一块内存。只有在需要修改时，才会执行 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/OS/23.html" title="内部碎片和外部碎片">内部碎片和外部碎片</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-07T14:51:00.000Z" title="发表于 2023-06-07 22:51:00">2023-06-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/OS/">OS</a></span></div><div class="content">内部碎片：固定分区存储管理会产生内部碎片补充概念:固定分区存储管理将主存发划分为系统区和用户区,系统区存放操作系统驻留代码和数据,用户区划分为若干个连续区域,每个区域的位置固定,大小可以相同也可以不同,但是每个区域在任意时刻只能装入一道作业,一旦划分好区域,主存中的分区个数就固定了.当我们在10KB大小的一个分区中装入8KB大小的程序时,此时的分区有2KB被浪费掉了,而且由于每个分区只能装入一个程序,所以这2KB大小的空间也不能被其他的程序使用,此时我们可以说产生了2KB的内部碎片.当内部积累到一定程度时,将严重影响主存空间的利用率个系统的运行效率
+外部碎片：可变分区存储管理可能产生外部碎片在可变分区存储管理中,主存中的分区不是事先划分好的,而是在主存空间充足时,根据该作页需要的空间大小分配一个分区给他,实现了作业大小等于分区大小,解决了内部碎片的问题那么,作业大小等于分区大小为什么还会产生碎片呢?来看一个例子:
+上图的四个分区中有三个正在被使用,一个未被使用,那么当我们要装入大小为12KB的作业时,系统会为我们在15KB的空闲区中划分出一个12个KB大小的分区,这样这个15KB大小的 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/OS/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95.html" title="页面置换算法">页面置换算法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-05T15:24:00.000Z" title="发表于 2023-06-05 23:24:00">2023-06-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/OS/">OS</a></span></div><div class="content">页面置换算法是操作系统中用于管理虚拟内存的重要技术之一。它决定了当物理内存不足时，操作系统应该选择哪些页面从内存中移出，以便为新的页面腾出空间。以下是几种常见的页面置换算法：
+先进先出（FIFO）：最早进入内存的页面将最早被置换出去。这种算法简单易实现，但可能会导致”Belady’s Anomaly”现象，即增加页面数时缺页率反而增加。
+最近最久未使用（LRU）：选择最长时间未被访问的页面进行置换。这种算法通常能够比较好地利用局部性原理，但实现较为复杂，需要记录页面的访问时间。
+最不经常使用（LFU）：选择在最近一段时间内被访问次数最少的页面进行置换。这种算法适用于那些具有长期不活跃期的页面，但需要维护每个页面的访问计数器。
+时钟（Clock）算法：基于一个类似于时钟的数据结构，将页面组织成一个环形链表。每个页面有一个访问位，当访问位被设置时，表示页面最近被访问过。算法按顺序扫描环形链表，如果访问位为0，则选择该页面进行置换，并将访问位置为1；如果访问位为1，则将其置为0，并继续扫描下一个页面。
+最佳置换（OPT）：根据未来一段时间内页面的访问情况，选择最长时间内不会被访问到的页面进行 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/OS/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E7%B3%BB%E7%BB%9F.html" title="虚拟内存系统">虚拟内存系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-04T10:18:00.000Z" title="发表于 2023-06-04 18:18:00">2023-06-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/OS/">OS</a></span></div><div class="content">虚拟内存系统不仅仅指交换空间（swap），它是一种将逻辑地址与物理地址进行转换的技术，通过它，操作系统可以为每个进程提供独立的地址空间。
+虚拟内存系统通过使用页表或段表等数据结构来实现逻辑地址到物理地址的映射。逻辑地址是由进程使用的地址空间，而物理地址是实际对应到计算机的物理内存地址。虚拟内存系统使得每个进程认为它拥有连续的私有地址空间，而实际上这些地址可能被映射到物理内存的不同位置，或者在需要时被交换到磁盘的交换空间。
+虚拟内存系统的主要目的是提供以下几个方面的好处：
+1.扩展地址空间：每个进程可以拥有比物理内存更大的地址空间，使得程序可以使用比实际可用内存更多的内存。
+2.内存隔离：每个进程拥有独立的地址空间，彼此之间的内存访问互不干扰，提高了安全性和稳定性。
+3.内存共享：虚拟内存系统允许多个进程共享同一块物理内存区域，这在进程间通信和资源共享方面非常有用。
+4.内存管理：虚拟内存系统可以动态地将物理内存与磁盘上的交换空间进行交换，从而更有效地管理内存资源，提高系统的整体性能。
+因此，虚拟内存系统涵盖了逻辑地址与物理地址的转换关系，以及与交换空间相关的功能。它是操作系统中重要的内 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/Juhost%20HK.html" title="Juhost HK">Juhost HK</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-27T14:36:00.000Z" title="发表于 2023-05-27 22:36:00">2023-05-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">上游是Cloudie
+测试机器:1Core CPU1GB RAM20GB DISK1TB&#x2F;Month BW100Mbps PORTLinux OS1 IPv41 IPv6Starting at$4.99&#x2F;mo
+性能
+流媒体解锁
+MTR回程路由上海电信:root@JUHOST-wTxFb1:~# mtr -rznT 202.96.209.133Start: 2023-06-27T10:16:20-0400HOST: JUHOST-wTxFb1               Loss%   Snt   Last   Avg  Best  Wrst StDev
 
-    document.querySelectorAll('script[data-pjax]').forEach(item => {
-        const newScript = document.createElement('script')
-        const content = item.text || item.textContent || item.innerHTML || ""
-        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
-        newScript.appendChild(document.createTextNode(content))
-        item.parentNode.replaceChild(newScript, item)
-    })
+AS???    10.182.102.53        0.0%    10    1.4   4.3   0.8  10.3   3.8
+AS???    10.82.3.254          0.0%    10   11.4 116.7   1.6 1003. 312.1
+AS???    ???                 100.0    10    0.0   0.0   0.0   0.0 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/addswap.html" title="Linux添加swap交换分区(虚拟内存)">Linux添加swap交换分区(虚拟内存)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-29T09:44:00.000Z" title="发表于 2023-04-29 17:44:00">2023-04-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">以添加1GB SWAP为例
+生成文件块SWAP一般设置为内存的2倍，并非完全以此为标准; count后面的数值为要设置的swap大小xxMB
+1dd if=/dev/zero of=/var/swapfile bs=1M count=1024
 
-    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+创建swap文件1/sbin/mkswap /var/swapfile
 
-})
+激活swap文件1/sbin/swapon /var/swapfile
 
-document.addEventListener('pjax:error', (e) => {
-    if (e.request.status === 404) {
-        pjax.loadUrl('/404.html')
-    }
-})</script><!-- theme--><script>initTheme = () => {
-    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const cachedMode = utils.saveToLocal.get('theme');
-    if (cachedMode === undefined) {
-        const nowMode =
-            isDarkMode ? 'dark' : 'light'
-        document.documentElement.setAttribute('data-theme', nowMode);
+查看一下swap是否正确：1/sbin/swapon -s
+
+ 另外为了安全建议改一下权限：
+1chmod 0600 /var/swapfile
+
+fstab文件中添加开机自动挂载设置1echo &quot;/var/swapfile swap swap defaults 0 0&quot; &gt;&gt;/etc/fstab
+
+删除SWAP
+12/sbin/swapoff /var/swapfile rm -f /var/swapfile
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/tar.html" title="tar命令">tar命令</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-28T07:25:00.000Z" title="发表于 2023-03-28 15:25:00">2023-03-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">tar命令: 用途比较多，可以用于打包，压缩和解压缩等
+打包和压缩的区别打包:将一堆文件或目录变成一个文件
+压缩:将一个大文件，通过压缩算法变成一个小文件
+Linux中的很多压缩算法只能对一个文件进行压缩，所以我们要压缩的话，必须先进行打包
+常用的压缩算法gzip、bzip2、xz等
+tar命令常用的参数-c 新建打包文件，同 -v 一起使用 查看过程中打包文件名
+-x 解决文件， -C 解压到对应的文件目录。
+-f 后面接要处理的文件
+-j 通过bzip2方式压缩或解压，最后以.tar.br2 为后缀。压缩后大小小于.tar.gz
+-z 通过gzip方式压缩或解压，最后以.tar.gz 为后缀
+-v 压缩或解压过程中，显示出来过程
+-t 查看打包文件中内容，重点文件名
+-u 更新压缩文件中的内容。
+-p 保留绝对路径，即允许备份数据中含有根目录
+-P 保留数据原来权限及属性。
+–exclude &#x3D;FILE 压缩过程中，不要讲FILE打包
+-c&#x2F;-x&#x2F;-t&#x2F;u 不可以同时出现
+1.压缩tar -jcvf 压缩文件名称.tar.br2
+tar -z ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/OS/cs&amp;ip.html" title="CS和IP寄存器">CS和IP寄存器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-28T07:19:00.000Z" title="发表于 2023-03-28 15:19:00">2023-03-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/OS/">OS</a></span></div><div class="content">CS和IP寄存器（在x86架构的计算机中）是两个非常重要的寄存器，它们一起组成了CPU中的指令指针，用于指示CPU当前正在执行的指令的位置。
+CS寄存器（Code Segment Register）存储了代码段的起始地址，它是在编译和链接过程中由操作系统和编译器计算出来的。当CPU执行一条指令时，它会从CS寄存器指向的内存地址中读取指令代码，并将其存储到CPU中的缓存中等待执行。
+IP寄存器（Instruction Pointer Register）存储了指令偏移量，它指示了CPU当前正在执行的指令在代码段中的偏移量。当CPU执行完一条指令后，它会根据IP寄存器中存储的偏移量计算出下一条指令的地址，并将其存储到CS寄存器中，然后继续执行下一条指令。
+CS和IP寄存器一起组成了CPU中的指令指针，它们的值随着程序的执行而不断变化，用于控制CPU的执行流程。在操作系统中，CS和IP寄存器的值通常可以被读取和修改，从而控制程序的执行流程和运行状态。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/OS/9.html" title="影响CPU寻址能力的因素">影响CPU寻址能力的因素</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-28T07:16:00.000Z" title="发表于 2023-03-28 15:16:00">2023-03-28</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/OS/">OS</a></span></div><div class="content">1.CPU内部寄存器的位数 是决定其寻址能力的一个重要因素。具体来说，CPU内部寄存器的位数决定了CPU可以直接寻址的最大物理内存空间大小。例如，32位CPU最大可以直接寻址4GB的物理内存空间，64位CPU最大可以直接寻址的物理内存空间大小则高达16EB(即16 x 1024 x 1024 x 1024 x 1024 GB)
+2.地址总线的位数 决定了CPU可以传输的地址信息的位数。例如，32位的地址总线可以传输32位的地址信息，因此最多可以寻址4GB的物理内存空间。
+3.物理内存的大小：CPU能够寻址的物理内存空间大小受到物理内存大小的限制。如果物理内存大小超过了CPU的寻址能力，则CPU只能访问其中的一部分内存。
+4.操作系统的限制：操作系统也会对CPU的寻址能力进行限制。例如，32位操作系统只能管理最多4GB的物理内存空间，即使CPU的寻址能力超过了4GB。
+5. 虚拟内存技术：虚拟内存技术可以将磁盘上的空间作为物理内存使用，从而扩大了CPU的寻址能力。
+总之，CPU的寻址能力受到多个因素的限制，需要综合考虑这些因素以确定CPU可以寻址的最大物理内存空间大小。
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/photo.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sitao</div><div class="author-info__description">不活在别人的评论里</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/arch-python3-install.html" title="ArchLinux 编译安装 Python 3">ArchLinux 编译安装 Python 3</a><time datetime="2024-07-19T00:57:22.000Z" title="发表于 2024-07-19 08:57:22">2024-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/shell-string-operation.html" title="Shell常见的字符串操作">Shell常见的字符串操作</a><time datetime="2024-07-16T02:53:37.000Z" title="发表于 2024-07-16 10:53:37">2024-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/archlinux-install.html" title="云服务器/VPS 安装Arch Linux">云服务器/VPS 安装Arch Linux</a><time datetime="2024-06-10T02:19:12.000Z" title="发表于 2024-06-10 10:19:12">2024-06-10</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">14</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/VPS/"><span class="card-category-list-name">VPS</span><span class="card-category-list-count">19</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E4%BA%AB/"><span class="card-category-list-name">分享</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="card-category-list-name">计算机网络</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/HK/" style="font-size: 1.5em; color: #99a9bf">HK</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" style="font-size: 1.42em; color: #99a6b7">编译安装</a> <a href="/tags/Linux/" style="font-size: 1.26em; color: #999fa8">Linux</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/Bandwagon/" style="font-size: 1.18em; color: #999ca1">Bandwagon</a> <a href="/tags/iRedMail/" style="font-size: 1.1em; color: #999">iRedMail</a> <a href="/tags/DMIT/" style="font-size: 1.18em; color: #999ca1">DMIT</a> <a href="/tags/VPS/" style="font-size: 1.18em; color: #999ca1">VPS</a> <a href="/tags/Debian/" style="font-size: 1.18em; color: #999ca1">Debian</a> <a href="/tags/archlinux/" style="font-size: 1.34em; color: #99a3b0">archlinux</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">47</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-10-17T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-07-25T06:26:57.042Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Sitao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://sitao.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('/pluginsSrc/typed.js/dist/typed.umd.js').then(subtitleType)
+      }
     } else {
-        document.documentElement.setAttribute('data-theme', cachedMode);
+      subtitleType()
     }
-    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+  }
 }
-initTheme()</script><!-- google adsense--><!-- search--><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["uncategorized/arch-python3-install.html","uncategorized/shell-string-operation.html","Linux/archlinux-install.html","Linux/archlinux-install-3.html","Linux/archlinux-install-2.html","Linux/archlinux-install-1.html","计算机网络/tcp_send&recv.html","分享/PyCharmTo2099.html","Python/python3_install.html","VPS/installDebian.html","计算机网络/127.0.0.1&0.0.0.0.html","Linux/alist.html","VPS/219.html","VPS/DMIT-Tokyo-CN2-GIA.html","VPS/myfirst7950Xvps.html","Linux/bbrv3.html","VPS/iredmail.html","Linux/debian-sources.html","Linux/kernel.html","分享/idm.html","VPS/gcphk.html","Linux/installmysql 8.0.34.html","VPS/Evoxt HK.CMI.html","VPS/v.ps-London-9929.html","VPS/DMIT HK CN2-GIA.html","VPS/Misaka HK Optimized.html","VPS/RFCHOST HK.CMI.html","VPS/V.PS-HK-CMI.html","VPS/bwhtheplanv2.html","Linux/io.html","Linux/initramfs.html","OS/fork&exec.html","OS/23.html","OS/页面置换算法.html","OS/虚拟内存系统.html","VPS/Juhost HK.html","Linux/addswap.html","Linux/tar.html","OS/cs&ip.html","OS/9.html","Docker/3.html","Linux/16.html","VPS/CubeCloud-HK-CN2-GIA.html","VPS/66.html","VPS/vps-scripts.html","VPS/V.PS-au-9929.html","VPS/34.html"];function toRandomPost(){ pjax.loadUrl(GLOBAL_CONFIG.root+posts[Math.floor(Math.random()*posts.length)]); }</script>
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["尽人事，听天命","心无旁骛，万事可破"])
+  } else {
+    document.getElementById("subtitle").textContent = "尽人事，听天命"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
