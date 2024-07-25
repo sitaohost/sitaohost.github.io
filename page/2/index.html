@@ -1,247 +1,172 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Sitao</title><meta name="author" content="Sitao"><meta name="copyright" content="Sitao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="唯实惟新 至诚致志"><link rel="shortcut icon" href="/img/photo.ico"><link rel="canonical" href="https://sitao.org/page/2/"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '天',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: true,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Sitao',
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2024-07-25 14:26:57'
-}</script><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
-          }
-          localStorage.setItem(key, JSON.stringify(item))
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sitao</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/photo.ico"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.13.4"><!-- inject head--><link rel="canonical" href="https://sitao.org/page/2/"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="唯实惟新 至诚致志"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Sitao"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/photo.ico"><link rel="apple-touch-icon" href="/img/photo.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.13.4' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+    
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+    
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+    
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+    
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+        
+                if (name && keyObj[name]) return
+        
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+        }
+    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: {"limit":50,"author":"作者: Sitao","link":"链接: ","source":"来源: Sitao","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
         },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
-          }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
-          }
-          return item.value
-        }
-      }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
+        sayhello2: [],
+        sayhello3: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    post_ai: false,
+    right_menu: false,
+    lure: false,
+    expire: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: false,
+    is_page: false,
+    is_home: true,
+    page: 'solitude',
+    toc: false,
+    comment: false,
+    ai_text: false
+}</script><meta name="generator" content="Hexo 7.2.0"></head><body id="body" data-type="solitude"><!-- universe--><canvas id="universe"></canvas><!-- background img--><!-- loading--><!-- console--><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/HK/">HK<sup>7</sup></a><a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/">编译安装<sup>5</sup></a><a href="/tags/Bandwagon/">Bandwagon<sup>2</sup></a><a href="/tags/DMIT/">DMIT<sup>2</sup></a><a href="/tags/VPS/">VPS<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>3</sup></a><a href="/tags/Python/">Python<sup>1</sup></a><a href="/tags/archlinux/">archlinux<sup>4</sup></a><a href="/tags/Debian/">Debian<sup>2</sup></a><a href="/tags/iRedMail/">iRedMail<sup>1</sup></a><a href="/tags/shell/">shell<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">Solitude</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Sitao</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="home"><div id="category-bar"><div class="category-bar-items home" id="category-bar-items"><div class="category-bar-item select" id="category-bar-home"><a href="/">推荐</a></div><div class="category-bar-item"><a href="/archives/">全部文章</a></div><div class="category-bar-item" id="计算机网络"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="category-bar-item" id="VPS"><a href="/categories/VPS/">VPS</a></div><div class="category-bar-item" id="Linux"><a href="/categories/Linux/">Linux</a></div><div class="category-bar-item" id="OS"><a href="/categories/OS/">OS</a></div><div class="category-bar-item" id="Docker"><a href="/categories/Docker/">Docker</a></div><div class="category-bar-item" id="分享"><a href="/categories/%E5%88%86%E4%BA%AB/">分享</a></div><div class="category-bar-item" id="Python"><a href="/categories/Python/">Python</a></div></div><div class="category-bar-right"><a class="category-bar-more" href="/categories/">更多</a></div></div><div class="recent-posts" id="recent-posts"><div class="recent-post-item" onclick="pjax.loadUrl('/Python/python3_install.html')"><div class="post_cover"><a href="/Python/python3_install.html" title="Debian 编译安装 Python 3"><img class="post_bg" src="/img/default.avif" alt="Debian 编译安装 Python 3"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Python</span><a class="unvisited-post" href="/Python/python3_install.html">未读</a></div><a class="article-title" href="/Python/python3_install.html" title="Debian 编译安装 Python 3">Debian 编译安装 Python 3</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2024-03-30T14:44:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/127.0.0.1&amp;0.0.0.0.html')"><div class="post_cover"><a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/127.0.0.1&amp;0.0.0.0.html" title="127.0.0.1和0.0.0.0 的区别"><img class="post_bg" src="/img/default.avif" alt="127.0.0.1和0.0.0.0 的区别"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">计算机网络</span><a class="unvisited-post" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/127.0.0.1&amp;0.0.0.0.html">未读</a></div><a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/127.0.0.1&amp;0.0.0.0.html" title="127.0.0.1和0.0.0.0 的区别">127.0.0.1和0.0.0.0 的区别</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-12-24T08:17:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/alist.html')"><div class="post_cover"><a href="/Linux/alist.html" title="Debian 编译安装 Alist v3  - 定制需求"><img class="post_bg" src="/img/default.avif" alt="Debian 编译安装 Alist v3  - 定制需求"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/alist.html">未读</a></div><a class="article-title" href="/Linux/alist.html" title="Debian 编译安装 Alist v3  - 定制需求">Debian 编译安装 Alist v3  - 定制需求</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" onclick="event.stopPropagation();"><span class="tags-punctuation">编译安装</span></a></span><span class="post-meta-date"><time datetime="2023-10-12T14:45:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/219.html')"><div class="post_cover"><a href="/VPS/219.html" title="绿云(GreenCloud) HK DC1 三网直连 测试"><img class="post_bg" src="/img/default.avif" alt="绿云(GreenCloud) HK DC1 三网直连 测试"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/219.html">未读</a></div><a class="article-title" href="/VPS/219.html" title="绿云(GreenCloud) HK DC1 三网直连 测试">绿云(GreenCloud) HK DC1 三网直连 测试</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/HK/" onclick="event.stopPropagation();"><span class="tags-punctuation">HK</span></a></span><span class="post-meta-date"><time datetime="2023-10-07T06:08:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/DMIT-Tokyo-CN2-GIA.html')"><div class="post_cover"><a href="/VPS/DMIT-Tokyo-CN2-GIA.html" title="DMIT Tokyo CN2 GIA 夏日活动款"><img class="post_bg" src="/img/default.avif" alt="DMIT Tokyo CN2 GIA 夏日活动款"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/DMIT-Tokyo-CN2-GIA.html">未读</a></div><a class="article-title" href="/VPS/DMIT-Tokyo-CN2-GIA.html" title="DMIT Tokyo CN2 GIA 夏日活动款">DMIT Tokyo CN2 GIA 夏日活动款</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/DMIT/" onclick="event.stopPropagation();"><span class="tags-punctuation">DMIT</span></a></span><span class="post-meta-date"><time datetime="2023-10-01T14:33:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/myfirst7950Xvps.html')"><div class="post_cover"><a href="/VPS/myfirst7950Xvps.html" title="年轻人的第一台 AMD Ryzen 9 7950X VPS"><img class="post_bg" src="/img/default.avif" alt="年轻人的第一台 AMD Ryzen 9 7950X VPS"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/myfirst7950Xvps.html">未读</a></div><a class="article-title" href="/VPS/myfirst7950Xvps.html" title="年轻人的第一台 AMD Ryzen 9 7950X VPS">年轻人的第一台 AMD Ryzen 9 7950X VPS</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-09-23T09:15:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/VPS/iredmail.html')"><div class="post_cover"><a href="/VPS/iredmail.html" title="Debian 11 搭建自己的邮件系统- iRedMail"><img class="post_bg" src="/img/default.avif" alt="Debian 11 搭建自己的邮件系统- iRedMail"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">VPS</span><a class="unvisited-post" href="/VPS/iredmail.html">未读</a></div><a class="article-title" href="/VPS/iredmail.html" title="Debian 11 搭建自己的邮件系统- iRedMail">Debian 11 搭建自己的邮件系统- iRedMail</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/iRedMail/" onclick="event.stopPropagation();"><span class="tags-punctuation">iRedMail</span></a></span><span class="post-meta-date"><time datetime="2023-09-09T08:51:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/debian-sources.html')"><div class="post_cover"><a href="/Linux/debian-sources.html" title="Debian 11 / 12 手动修改镜像源"><img class="post_bg" src="/img/default.avif" alt="Debian 11 / 12 手动修改镜像源"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/debian-sources.html">未读</a></div><a class="article-title" href="/Linux/debian-sources.html" title="Debian 11 / 12 手动修改镜像源">Debian 11 / 12 手动修改镜像源</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Debian/" onclick="event.stopPropagation();"><span class="tags-punctuation">Debian</span></a></span><span class="post-meta-date"><time datetime="2023-08-25T14:17:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/kernel.html')"><div class="post_cover"><a href="/Linux/kernel.html" title="Debian 11 编译内核"><img class="post_bg" src="/img/default.avif" alt="Debian 11 编译内核"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">Linux</span><a class="unvisited-post" href="/Linux/kernel.html">未读</a></div><a class="article-title" href="/Linux/kernel.html" title="Debian 11 编译内核">Debian 11 编译内核</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" onclick="event.stopPropagation();"><span class="tags-punctuation">编译安装</span></a><a class="article-meta__tags" href="/tags/Linux/" onclick="event.stopPropagation();"><span class="tags-punctuation">Linux</span></a></span><span class="post-meta-date"><time datetime="2023-08-23T06:17:00.000Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/%E5%88%86%E4%BA%AB/idm.html')"><div class="post_cover"><a href="/%E5%88%86%E4%BA%AB/idm.html" title="Windows 一键激活IDM"><img class="post_bg" src="/img/default.avif" alt="Windows 一键激活IDM"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">分享</span><a class="unvisited-post" href="/%E5%88%86%E4%BA%AB/idm.html">未读</a></div><a class="article-title" href="/%E5%88%86%E4%BA%AB/idm.html" title="Windows 一键激活IDM">Windows 一键激活IDM</a></div><break></break><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2023-08-09T02:57:00.000Z"></time></span></div></div></div><!-- pagination--><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="solitude st-arrow-left-bold"></i> <div class="pagination_tips_prev">上一页</div></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><div class="pagination_tips_next">下一页</div> <i class="solitude st-arrow-right-bold"></i></a><div class="toPageGroup"><input id="toPageText" oninput="value=value.replace(/[^0-9]/g,'')" maxlength="3" title="跳转到指定页面" onkeyup="if (this.value === '0') this.value = ''"><a id="toPageButton" onclick="sco.toPage()"><i class="solitude st-show-right-line"></i></a></div></div></nav></div></div><!-- aside--><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" src="/img/avatar.avif"><div class="avatar-sticker"><img class="avatar-sticker-img" src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">Sitao</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="webinfo"><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-folder-fill"></i><div class="item-name">文章总数 :</div></div><div class="item-count">47</div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-calendar-todo-fill"></i><div class="item-name">建站天数 :</div></div><div class="item-count" id="runtimeshow"></div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-loop-left-fill"></i><div class="item-name">最后更新 :</div></div><time class="item-count" datetime="2024-07-25T06:35:59.197Z"></time></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2024 By&nbsp;<a class="footer-bar-link" href="/">Sitao</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/js/utils.js?v=1.13.4"></script><script src="/js/main.js?v=1.13.4"></script><script src="/js/third_party/waterfall.min.js?v=1.13.4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/js/third_party/universe.min.js?v=1.13.4"></script><script>dark()
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
 
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
 
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-        if (t === 'dark') activateDarkMode()
-        else if (t === 'light') activateLightMode()
-      
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/photo.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Sitao"><img class="site-icon" src="/img/photo.jpeg"/><span class="site-name">Sitao</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/categories/Linux/"><i class="fa-fw fas fa-brands fa-linux"></i><span> Linux</span></a></div><div class="menus_item"><a class="site-page" href="/categories/VPS/"><i class="fa-fw fa-solid fa-server"></i><span> VPS</span></a></div><div class="menus_item"><a class="site-page" href="/pages/good_sentences.html"><i class="fa-fw fa-solid fa-square-share-nodes"></i><span> 好句分享</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Sitao</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Python/python3_install.html" title="Debian 编译安装 Python 3">Debian 编译安装 Python 3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-03-30T14:44:00.000Z" title="发表于 2024-03-30 22:44:00">2024-03-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content">以3.12.2版本为例在root用户下进行
-1.安装编译所需的依赖项1apt update &amp;&amp; apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev libbz2-dev pkg-config liblzma-dev sqlite3 tk-dev uuid-dev libgdbm-compat-dev -y
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
 
-2.下载并解压 Python 源代码123wget https://www.python.org/ftp/python/3.12.2/Python-3.12.2.tar.xztar -xvf Python-3.12.2.tar.xzcd Python-3.12.2
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
 
-3.配置编译选项运行 configure 脚本配置编译选项，这里我们启用优化并设置安装路径：
-1./configure --enable-optimizations --prefix=/usr ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/127.0.0.1&amp;0.0.0.0.html" title="127.0.0.1和0.0.0.0 的区别">127.0.0.1和0.0.0.0 的区别</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-24T08:17:00.000Z" title="发表于 2023-12-24 16:17:00">2023-12-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="content">127.0.0.1和0.0.0.0的共同点:1.都是IPV4地址;2.都属于A类地址;3.都属于特殊地址。
-127.0.0.1所有以127开头的IP地址(127.0.0.0&#x2F;8)都被视为回环地址（Loop back address），其所在的回环接口一般被理解为虚拟网卡，并不是真正的路由器接口。简单来说，当数据包被发送到以127开头的IP地址时，该数据包并不会离开发送主机，而是由主机自身接收处理，根本传不出去，外部设备无法通过回环地址访问到这台主机。
-当你向这个地址段中的任何一个IP地址发送数据时，数据包不会离开你的设备，而是由你的设备自身的网络协议栈处理。这意味着无论你使用这个范围内的哪个IP地址，实际上都是在与你自己设备上的服务或应用程序进行通信。
-127.0.0.1是属于127集合中的一个具体实例，而所有网络号为127的IP地址都被统称为回环地址。因此，回环地址这个概念并不等同于单一的127.0.0.1地址，而是包含127.0.0.1在内的一个地址集合。也就是说，127.0.0.1是回环地址集合的一部分，二者之间是包含关系。通过使用ping 127.0.0.1 测试某台 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/alist.html" title="Debian 编译安装 Alist v3  - 定制需求">Debian 编译安装 Alist v3  - 定制需求</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-12T14:45:00.000Z" title="发表于 2023-10-12 22:45:00">2023-10-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">
-Alist是一款支持多种存储(比如本地存储、阿里云盘、OneDrive、Google Drive)的目录文件列表程序，支持 web 浏览与webdav，且易于拓展. 后端基于gin，前端使用react
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-AList 从一开始就设计为易于安装,几乎一键开启.但是直接使用官方编译好的程序文件有时候不太满足自己的需求，这时候就需要自己修改源码然后编译安装了.我的需求是删掉”Aliyun Video Previewer”的默认预览，我将用Debian 11演示
-编译前的准备工作1.Golang
-12wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gztar -zxvf go1.21.0.linux-amd64.tar.gz -C /usr/local/
+})
 
-配置 ${PATH} 包含 Go 的 bin 目录的环境变量 &#x2F;usr&#x2F;loca&#x2F;go&#x2F;bin：
-12echo &quot;export PATH=/usr/local/go/bin:$&#123;PATH&#125;&quot; | tee /etc/ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/219.html" title="绿云(GreenCloud) HK DC1 三网直连 测试">绿云(GreenCloud) HK DC1 三网直连 测试</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-07T06:08:00.000Z" title="发表于 2023-10-07 14:08:00">2023-10-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">DC2三网绕，本次测试一下DC1机房的：
-HK-11024MB RAM1024MB SWAP15GB RAID-10 SSD1 core CPU1 IPv4&#x2F;112 IPv6500GB Bandwidth1Gbps PortLinux OSHongKong DC1 LocationSolusVM Control Panel$6.00 USD 月繳
-测试IP: 119.160.232.1
-性能
-流媒体解锁
-回程路由北京电信
-traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets
- 1  *
- 2  *
- 3  121.59.100.237  1.69 ms  AS23764  China, Hong Kong, ChinaTelecom
- 4  203.22.177.201  6.14 ms  *  China, Hong Kong, ChinaTelecom
- 5  203.22.178.102  36.86 ms  *  China, Beijing, ChinaTeleco ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/DMIT-Tokyo-CN2-GIA.html" title="DMIT Tokyo CN2 GIA 夏日活动款">DMIT Tokyo CN2 GIA 夏日活动款</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-01T14:33:00.000Z" title="发表于 2023-10-01 22:33:00">2023-10-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">7月月份买的，一直没测,现在补上配置: 1c2g40g 月500G@300Mbps1IPv4 + 1IPV6季付68.88$或年付199.99$回程三网cn2 gia测试IP : 103.117.103.50
-前往官网: https://sitao.org/dmit
-性能
-流媒体
-回程路由----------------------------------------------------------------------
-北京电信
-traceroute to 219.141.147.210 (219.141.147.210), 30 hops max, 32 byte packets
- 1  premium-routing-irb-100.re.tyo.DMIT.com (193.41.248.195)  0.29 ms  *  Japan, Tokyo, dmit.io
- 2  AS23764.tyo.DMIT.com (193.41.248.203)  0.70 ms  *  Japan, Tokyo, dmit.io
- 3  69.194.165.213  0.69 ms  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/myfirst7950Xvps.html" title="年轻人的第一台 AMD Ryzen 9 7950X VPS">年轻人的第一台 AMD Ryzen 9 7950X VPS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-09-23T09:15:00.000Z" title="发表于 2023-09-23 17:15:00">2023-09-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">逛LET论坛的时候看到的，买了个试试帖子链接
-1x AMD Ryzen 9 7950X (4.5 GHz++)2GB DDR5 RAM50GB NVMe (PCIe 4.0)3000GB Bandwidth (Comment below your order number for FREE double bandwidth!)10Gbit Port1x IPv4 Address&#x2F;64 IPv6DDOS Watch™5x FREE Backup SlotsAutomated rDNSVirtFusion Control PanelSpokane, WA (North West USA)BYOIP$9.99 &#x2F; Month $4.99 - Use coupon code H14HUZ9UNT
-优惠后月付4.99刀，还行
-然后抽空给了商家好评，老板又多送了一个月
-yabs测试Processor  : AMD Ryzen 9 7950X 16-Core Processor
-CPU cores  : 1 @ 4499.996 MHz
-AES-NI     : ✔ Enable ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/VPS/iredmail.html" title="Debian 11 搭建自己的邮件系统- iRedMail">Debian 11 搭建自己的邮件系统- iRedMail</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-09-09T08:51:00.000Z" title="发表于 2023-09-09 16:51:00">2023-09-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/VPS/">VPS</a></span></div><div class="content">前言如果你非常注重个人隐私和安全,不想用大厂的邮件服务,那么自己搭建一个邮件服务器是一个不错的选择; 而且用自己的域名作为邮箱的后缀是非常有意思的，也好看;﻿iRedMail是一套成熟稳定的邮件服务器系统，它免费，开源且拥有优秀的性能，全面实用的功能Github地址 官网
-准备工作
-确保你的服务器开启了25端口测试方法:
-  telnet smtp.google.com 25 #谷歌邮箱地址  或者  telnet smtp.qq.com 25 #腾讯qq邮箱
-
-
-没有屏蔽显示如下：
-12345root@mail:~# telnet smtp.qq.com 25Trying 43.129.255.54...Connected to smtp.qq.com.Escape character is &#x27;^]&#x27;.220 newxmesmtplogicsvrsza9.qq.com XMail Esmtp QQ Mail Server.
-
-屏蔽显示如下，一直在连接：
-12root@mail:~$ telnet smtp.qq.com 25Trying 203.205.232.7 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/debian-sources.html" title="Debian 11 / 12 手动修改镜像源">Debian 11 / 12 手动修改镜像源</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-25T14:17:00.000Z" title="发表于 2023-08-25 22:17:00">2023-08-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">备份现有apt源配置
-1mv /etc/apt/sources.list /etc/apt/sources.list.old
-
-Debian 11全部复制后，直接粘贴并按下回车执行
-官方源12345678910cat &gt; /etc/apt/sources.list &lt;&lt; EOFdeb http://deb.debian.org/debian/ bullseye main contrib non-freedeb-src http://deb.debian.org/debian/ bullseye main contrib non-freedeb http://deb.debian.org/debian/ bullseye-updates main contrib non-freedeb-src http://deb.debian.org/debian/ bullseye-updates main contrib non-freedeb http://deb.debian.org/debian/ bullseye-backports main contrib non-fr ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/Linux/kernel.html" title="Debian 11 编译内核">Debian 11 编译内核</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-23T06:17:00.000Z" title="发表于 2023-08-23 14:17:00">2023-08-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">因为内核的代码非常多，所以内核编译需要花费比较长的时间。当然，如果你​的​计算机性能强劲，时间会短很多.配置要求：2核2GB内存以上，硬盘空间大于20GB
-本次用于编译的主机配置    Processor  : AMD Ryzen 7 7700X 8-Core Processor    CPU cores  : 2 @ 4491.560 MHz    AES-NI     : ✔ Enabled    VM-x&#x2F;AMD-V : ✔ Enabled    RAM        : 1.9 GiB    Swap       : 1024.0 MiB    Disk       : 28.5 GiB    Distro     : Debian GNU&#x2F;Linux 11 (bullseye)购买链接安装依赖apt install git build-essential libncurses-dev libssl-dev libelf-dev bison bc flex rsync debhelper screen -y
-
-下载源码Linux内核官网:kernel.org ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/%E5%88%86%E4%BA%AB/idm.html" title="Windows 一键激活IDM">Windows 一键激活IDM</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-09T02:57:00.000Z" title="发表于 2023-08-09 10:57:00">2023-08-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E4%BA%AB/">分享</a></span></div><div class="content">IDM简介
-IDM(Internet DownloadManager)是一种可将下载速度提高5倍，恢复和安排下载速度的工具。全面的错误恢复和恢复功能将由于连接丢失，网络问题，计算机关闭或意外断电而重新启动中断的下载。简单的图形用户界面使IDM变得用户友好且易于使用。Internet Download Manager具有智能下载逻辑加速器，该加速器具有智能动态文件分段功能和安全的分段下载技术，可加快下载速度。与其他下载管理器和加速器不同，InternetDownloadManager在下载过程中动态地对下载的文件进行分段，并在不进行额外的连接和登录阶段的情况下重用可用的连接，以实现最佳的加速性能。
-
-试用到期
-白嫖30天后，已经无法启动软件了
-这里介绍一个一键激活IDM的脚本，完全开源，没有发现后门
-Github地址：https://github.com/lstprjct/IDM-Activation-Script
-可以直接在我这里下载打包好的压缩包: IDM-Activation-Script-main.zip
-激活步骤1.前往官网下载最新版IDM：https://www.intern ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/photo.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Sitao</div><div class="author-info__description">不活在别人的评论里</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/arch-python3-install.html" title="ArchLinux 编译安装 Python 3">ArchLinux 编译安装 Python 3</a><time datetime="2024-07-19T00:57:22.000Z" title="发表于 2024-07-19 08:57:22">2024-07-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/shell-string-operation.html" title="Shell常见的字符串操作">Shell常见的字符串操作</a><time datetime="2024-07-16T02:53:37.000Z" title="发表于 2024-07-16 10:53:37">2024-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/archlinux-install.html" title="云服务器/VPS 安装Arch Linux">云服务器/VPS 安装Arch Linux</a><time datetime="2024-06-10T02:19:12.000Z" title="发表于 2024-06-10 10:19:12">2024-06-10</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            
-            </div>
-            <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">14</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/OS/"><span class="card-category-list-name">OS</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/VPS/"><span class="card-category-list-name">VPS</span><span class="card-category-list-count">19</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E4%BA%AB/"><span class="card-category-list-name">分享</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="card-category-list-name">计算机网络</span><span class="card-category-list-count">2</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/HK/" style="font-size: 1.5em; color: #99a9bf">HK</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" style="font-size: 1.42em; color: #99a6b7">编译安装</a> <a href="/tags/Linux/" style="font-size: 1.26em; color: #999fa8">Linux</a> <a href="/tags/shell/" style="font-size: 1.1em; color: #999">shell</a> <a href="/tags/Python/" style="font-size: 1.1em; color: #999">Python</a> <a href="/tags/Bandwagon/" style="font-size: 1.18em; color: #999ca1">Bandwagon</a> <a href="/tags/iRedMail/" style="font-size: 1.1em; color: #999">iRedMail</a> <a href="/tags/DMIT/" style="font-size: 1.18em; color: #999ca1">DMIT</a> <a href="/tags/VPS/" style="font-size: 1.18em; color: #999ca1">VPS</a> <a href="/tags/Debian/" style="font-size: 1.18em; color: #999ca1">Debian</a> <a href="/tags/archlinux/" style="font-size: 1.34em; color: #99a3b0">archlinux</a></div></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">47</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-10-17T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-07-25T06:26:57.042Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/wallhaven-6d7wrx.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Sitao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://sitao.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><div class="js-pjax"><script>window.typedJSFn = {
-  init: (str) => {
-    window.typed = new Typed('#subtitle', Object.assign({
-      strings: str,
-      startDelay: 300,
-      typeSpeed: 150,
-      loop: true,
-      backSpeed: 50,
-    }, null))
-  },
-  run: (subtitleType) => {
-    if (true) {
-      if (typeof Typed === 'function') {
-        subtitleType()
-      } else {
-        getScript('/pluginsSrc/typed.js/dist/typed.umd.js').then(subtitleType)
-      }
-    } else {
-      subtitleType()
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
     }
-  }
+})</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
 }
-</script><script>function subtitleType () {
-  if (true) {
-    typedJSFn.init(["尽人事，听天命","心无旁骛，万事可破"])
-  } else {
-    document.getElementById("subtitle").textContent = "尽人事，听天命"
-  }
-}
-typedJSFn.run(subtitleType)</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+initTheme()</script><!-- google adsense--><!-- search--><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["uncategorized/arch-python3-install.html","uncategorized/shell-string-operation.html","Linux/archlinux-install.html","Linux/archlinux-install-3.html","Linux/archlinux-install-2.html","Linux/archlinux-install-1.html","计算机网络/tcp_send&recv.html","分享/PyCharmTo2099.html","Python/python3_install.html","VPS/installDebian.html","计算机网络/127.0.0.1&0.0.0.0.html","Linux/alist.html","VPS/219.html","VPS/DMIT-Tokyo-CN2-GIA.html","VPS/myfirst7950Xvps.html","Linux/bbrv3.html","VPS/iredmail.html","Linux/debian-sources.html","Linux/kernel.html","分享/idm.html","VPS/gcphk.html","Linux/installmysql 8.0.34.html","VPS/Evoxt HK.CMI.html","VPS/v.ps-London-9929.html","VPS/DMIT HK CN2-GIA.html","VPS/Misaka HK Optimized.html","VPS/RFCHOST HK.CMI.html","VPS/V.PS-HK-CMI.html","VPS/bwhtheplanv2.html","Linux/io.html","Linux/initramfs.html","OS/fork&exec.html","OS/23.html","OS/页面置换算法.html","OS/虚拟内存系统.html","VPS/Juhost HK.html","Linux/addswap.html","Linux/tar.html","OS/cs&ip.html","OS/9.html","Docker/3.html","Linux/16.html","VPS/CubeCloud-HK-CN2-GIA.html","VPS/66.html","VPS/vps-scripts.html","VPS/V.PS-au-9929.html","VPS/34.html"];function toRandomPost(){ pjax.loadUrl(GLOBAL_CONFIG.root+posts[Math.floor(Math.random()*posts.length)]); }</script>
