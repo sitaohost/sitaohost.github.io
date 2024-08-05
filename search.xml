@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>什么是 overlay 文件系统？</title>
+      <link href="/uncategorized/overlay-info.html"/>
+      <url>/uncategorized/overlay-info.html</url>
+      
+        <content type="html"><![CDATA[<blockquote><p> <strong>OverlayFS</strong> 是一种联合文件系统，它允许将一个或多个文件系统（称为“层”）叠加在一起，以创建一个单一的、统一的文件系统视图。它特别适用于只读文件系统与可写层的组合，这使得在容器化环境、Live CD、和临时文件系统中非常有用。</p></blockquote><h1 id="OverlayFS-的主要概念"><a href="#OverlayFS-的主要概念" class="headerlink" title="OverlayFS 的主要概念"></a>OverlayFS 的主要概念</h1><p><strong>1.下层（Lower Layer）</strong>：这是一个只读文件系统，例如一个 squashfs 文件系统，它通常包含静态的操作系统和应用程序文件。<br><strong>2.上层（Upper Layer）：</strong>这是一个可写的文件系统，例如一个 tmpfs 或者一个普通的文件系统分区，用于存储文件系统的变化。<br><strong>3.合并目录（Merge Directory）：</strong>这是最终的挂载点，用户和应用程序在这里看到的是一个统一的文件系统视图。它将上层和下层的内容合并。<br><strong>4.工作目录（Work Directory）：</strong>这是一个用于 OverlayFS 操作的临时存储区域，需要在上层的同一个文件系统中。</p><h1 id="OverlayFS-工作原理"><a href="#OverlayFS-工作原理" class="headerlink" title="OverlayFS 工作原理"></a>OverlayFS 工作原理</h1><p><strong>1.读操作：</strong>当读取一个文件时，OverlayFS 会首先在上层查找该文件。如果在上层找到该文件，它将返回该文件内容。如果在上层找不到该文件，它将继续在下层查找。</p><p><strong>2.写操作：</strong>当写入一个文件时，如果该文件存在于下层，OverlayFS 会将该文件从下层复制到上层（称为写时复制，Copy-on-Write 或 CoW），然后对上层的文件进行写操作。如果文件只存在于上层，直接对其进行写操作</p><p>具体示例：</p><p>假设我们有一个只读的 squashfs 文件系统作为下层和一个可写的 tmpfs 作为上层。</p><p><strong>1.创建目录结构：</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /mnt/lower</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/upper</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/work</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/mergedbash</span><br></pre></td></tr></table></figure><p><strong>2.挂载下层和上层：</strong></p><p>假设 rootfs.squashfs 是下层</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop /path/to/rootfs.squashfs /mnt/lower</span><br></pre></td></tr></table></figure><p>挂载一个可写的 tmpfs 作为上层</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t tmpfs tmpfs /mnt/upper</span><br></pre></td></tr></table></figure><p>3.使用 OverlayFS 进行合并：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t overlay overlay -o lowerdir=/mnt/lower,upperdir=/mnt/upper,workdir=/mnt/work /mnt/merged</span><br></pre></td></tr></table></figure><p>4.检查合并结果：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /mnt/merged</span><br></pre></td></tr></table></figure><h2 id="典型应用场景"><a href="#典型应用场景" class="headerlink" title="典型应用场景"></a>典型应用场景</h2><p>1.容器技术：Docker 等容器技术使用 OverlayFS 来管理容器层，允许高效的镜像创建和写时复制。<br>2.Live CD&#x2F;USB 系统：Live 系统通常使用 OverlayFS 来在只读介质上运行操作系统，并提供可写的层以允许用户修改系统配置和安装软件。<br>3.开发环境：开发人员可以使用 OverlayFS 在不修改底层操作系统的情况下测试软件变化。</p><p>通过 OverlayFS，你可以轻松地将多个文件系统合并为一个统一的文件系统视图，从而实现灵活且高效的文件系统管理。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ArchLinux 编译安装 Python 3</title>
       <link href="/uncategorized/arch-python3-install.html"/>
       <url>/uncategorized/arch-python3-install.html</url>
