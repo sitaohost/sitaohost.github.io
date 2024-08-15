@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# 创建目录并下载ISO
+mkdir -p /iso && cd /iso
+wget https://dl.sitao.org/ramDebian/ramDebian_latest.iso
+
+# 获取根目录的设备号
+root_device=$(df / | awk 'NR==2 {print $1}')
+# 从设备号中提取分区号
+partitionr_root_number=$(echo "$root_device" | grep -oE '[0-9]+$')
+
+# 获取活动网络接口名称
+interface=$(ip -o link show | awk '$2 != "lo:" {print substr($2, 1, length($2)-1); exit}')
+
+# 判断是否为 DHCP 配置
+is_dhcp=$(ip addr show $interface | grep -o 'dynamic')
+
+# 生成GRUB菜单项
+if [ -n "$is_dhcp" ]; then
+    # DHCP 配置
+    echo "已识别到 DHCP 网络配置"
+
+    cat << EOF >> /etc/grub.d/40_custom
+menuentry "Sitao ramDebian ISO" {
+    set root=(hd0,$partitionr_root_number)
+    set isofile="/iso/ramDebian_latest.iso"
+    loopback loop \$isofile
+    echo "Starting \$isofile..."
+    linux (loop)/boot/vmlinuz iso_dev=$root_device iso_name=\$isofile network=dhcp
+    initrd (loop)/boot/initrd.img
+}
+EOF
+
+else
+    # 静态 IP 配置
+    echo "已识别到静态 IP 网络配置"
+    
+    # 获取 IP 地址和子网掩码（CIDR 表示法）
+    ip_address=$(ip addr show $interface | awk '/inet / {print $2}' | cut -d'/' -f1)
+    ip_netmask=$(ip addr show $interface | awk '/inet / {print $2}' | cut -d'/' -f2)
+
+    # 获取网关
+    gateway=$(ip route | awk '/default/ {print $3}')
+
+    cat << EOF >> /etc/grub.d/40_custom
+menuentry "Sitao ramDebian ISO" {
+    set root=(hd0,$partitionr_root_number)
+    set isofile="/iso/ramDebian_latest.iso"
+    loopback loop \$isofile
+    echo "Starting \$isofile..."
+    linux (loop)/boot/vmlinuz iso_dev=$root_device iso_name=\$isofile network=static ip_address=$ip_address ip_netmask=$ip_netmask gateway=$gateway
+    initrd (loop)/boot/initrd.img
+}
+EOF
+
+fi
+
+# 更新GRUB配置
+sed -i 's/^GRUB_DEFAULT=.*/GRUB_DEFAULT=2/' /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
