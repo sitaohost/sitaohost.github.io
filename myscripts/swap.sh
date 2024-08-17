@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 clear
 read -p "想要多少MB的swap[默认1024MB]？" size

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 clear
 echo "Hi. 欢迎使用我写的Xray Reality+Vision脚本"
