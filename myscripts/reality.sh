@@ -250,7 +250,7 @@ cat << EOF > /xray/config.json
 			"security": "reality",
 			"realitySettings": {
 				"show": false,
-				"dest": "16969",
+				"dest": "$domain:443",
 				"xver": 0,
 				"serverNames": [
 					"$domain"
