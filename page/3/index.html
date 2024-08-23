@@ -59,7 +59,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-20 23:07:13',
+  postUpdate: '2024-08-23 16:16:40',
   postMainColor: '',
 }</script><noscript><style type="text/css">
   #nav {
@@ -272,14 +272,16 @@ if (true) {
     </div><div class="category-bar-next" id="category-bar-next" onclick="anzhiyu.scrollCategoryBarToRight()"><i class="anzhiyufont anzhiyu-icon-angle-double-right"></i></div><a class="catalog-more" href="/categories/">更多</a></div></div></div><div class="recent-post-item lastestpost-item" onclick="pjax.loadUrl('/VPS/iredmail.html')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">VPS</div><a class="unvisited-post" href="/VPS/iredmail.html" title="Debian 11 搭建自己的邮件系统- iRedMail">未读</a></div><a class="article-title" href="/VPS/iredmail.html" title="Debian 11 搭建自己的邮件系统- iRedMail">Debian 11 搭建自己的邮件系统- iRedMail</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; "></i><span class="article-meta-label">发表于</span><time datetime="2023-09-09T08:51:00.000Z" title="发表于 2023-09-09 16:51:00" time="2023-09-09 16:51:00">2023-09-09</time><time class="time_hidden" datetime="2024-05-30T15:19:42.000Z" title="更新于 2024-05-30 23:19:42" time="2024-05-30 23:19:42">2024-05-30</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/iRedMail/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>iRedMail</span></a></span></div><div class="content">前言如果你非常注重个人隐私和安全,不想用大厂的邮件服务,那么自己搭建一个邮件服务器是一个不错的选择; 而且用自己的域名作为邮箱的后缀是非常有意思的，也好看;﻿iRedMail是一套成熟稳定的邮件服务器系统，它免费，开源且拥有优秀的性能，全面实用的功能Github地址 官网
 准备工作
 确保你的服务器开启了25端口测试方法:
-  telnet smtp.google.com 25 #谷歌邮箱地址  或者  telnet smtp.qq.com 25 #腾讯qq邮箱
+telnet smtp.google.com 25 #谷歌邮箱地址或者telnet smtp.qq.com 25 #腾讯qq邮箱
 
 
 没有屏蔽显示如下：
 12345root@mail:~# telnet smtp.qq.com 25Trying 43.129.255.54...Connected to smtp.qq.com.Escape character is &#x27;^]&#x27;.220 newxmesmtplogicsvrsza9.qq.com XMail Esmtp QQ Mail Server.
 
 屏蔽显示如下，一直在连接：
-12root@mail:~$ telnet smtp.qq.com 25Trying 203.205.232.7 ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/debian-sources.html')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Linux</div><a class="unvisited-post" href="/Linux/debian-sources.html" title="Debian 11 / 12 手动修改镜像源">未读</a></div><a class="article-title" href="/Linux/debian-sources.html" title="Debian 11 / 12 手动修改镜像源">Debian 11 / 12 手动修改镜像源</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; "></i><span class="article-meta-label">发表于</span><time datetime="2023-08-25T14:17:00.000Z" title="发表于 2023-08-25 22:17:00" time="2023-08-25 22:17:00">2023-08-25</time><time class="time_hidden" datetime="2023-08-26T02:39:15.000Z" title="更新于 2023-08-26 10:39:15" time="2023-08-26 10:39:15">2023-08-26</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Debian/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Debian</span></a></span></div><div class="content">备份现有apt源配置
+12root@mail:~$ telnet smtp.qq.com 25Trying 203.205.232.7...
+
+很 ...</div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/Linux/debian-sources.html')"><div class="recent-post-info no-cover"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><div class="article-categories-original">Linux</div><a class="unvisited-post" href="/Linux/debian-sources.html" title="Debian 11 / 12 手动修改镜像源">未读</a></div><a class="article-title" href="/Linux/debian-sources.html" title="Debian 11 / 12 手动修改镜像源">Debian 11 / 12 手动修改镜像源</a></div><div class="article-meta-wrap"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days" style="font-size: 15px; "></i><span class="article-meta-label">发表于</span><time datetime="2023-08-25T14:17:00.000Z" title="发表于 2023-08-25 22:17:00" time="2023-08-25 22:17:00">2023-08-25</time><time class="time_hidden" datetime="2023-08-26T02:39:15.000Z" title="更新于 2023-08-26 10:39:15" time="2023-08-26 10:39:15">2023-08-26</time></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Debian/" event.cancelbubble onclick="window.event.cancelBubble=true;"><span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Debian</span></a></span></div><div class="content">备份现有apt源配置
 1mv /etc/apt/sources.list /etc/apt/sources.list.old
 
 Debian 11全部复制后，直接粘贴并按下回车执行
