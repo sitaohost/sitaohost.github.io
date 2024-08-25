@@ -1,3 +1,4 @@
+https://sitao.org/Linux/archlinux-install-2.html
 https://sitao.org/Linux/ramDebian-install-Debian-12.html
 https://sitao.org/Linux/ramDebian.html
 https://sitao.org/uncategorized/apt-interrupt-fix.html
@@ -6,7 +7,6 @@ https://sitao.org/Linux/archlinux-install.html
 https://sitao.org/tags/
 https://sitao.org/categories/
 https://sitao.org/uncategorized/arch-python3-install.html
-https://sitao.org/Linux/archlinux-install-2.html
 https://sitao.org/uncategorized/shell-string-operation.html
 https://sitao.org/Linux/archlinux-install-1.html
 https://sitao.org/Linux/archlinux-install-3.html
