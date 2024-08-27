@@ -2,7 +2,7 @@
 
 # 创建新用户
 read -p "请输入要创建的用户名: " USERNAME
-useradd -m $USERNAME
+useradd -s /usr/bin/bash -m $USERNAME
 
 # 设置密码
 passwd $USERNAME
