@@ -25,8 +25,7 @@ EOF
 
 systemctl restart sshd
 
-echo "SSH密钥已添加并且密码登录已禁用"
-echo
+echo "SSH密钥已添加并且密码登录已禁用..."
 echo -e "\033[36m SSH配置完成.\033[0m"
 
 bash -c 'source ~/.bashrc; echo -e "\033[36mDone.\033[0m"'
