@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 wget https://dl.nssurge.com/snell/snell-server-v4.0.1-linux-amd64.zip
-mkdir /snell
+mkdir -p /usr/local/snell
 apt install unzip -y
 unzip snell-server-v4.0.1-linux-amd64.zip
-mv snell-server /snell
-chmod +x /snell/snell-server
+mv snell-server /usr/local/snell
+chmod +x /usr/local/snell/snell-server
 
-cat << EOF >/snell/snell-server.conf
+cat << EOF > /usr/local/snell/snell-server.conf
 [snell-server]
 listen = 0.0.0.0:57866
-psk = cheatgfw233
+psk = sexjin-dovVod-4baqtu
 ipv6 = false
 EOF
 
@@ -20,15 +20,9 @@ Description=Snell Proxy Service
 After=network.target
 
 [Service]
-Type=simple
 User=nobody
 Group=nogroup
-LimitNOFILE=32768
-ExecStart=/snell/snell-server -c /snell/snell-server.conf
-AmbientCapabilities=CAP_NET_BIND_SERVICE
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=snell-server
+ExecStart=/usr/local/snell/snell-server -c /usr/local/snell/snell-server.conf
 
 [Install]
 WantedBy=multi-user.target
