@@ -88,10 +88,10 @@ else
 fi
 
 
-echo "安装Xray，版本：1.8.23"
+echo "安装Xray，版本：1.8.24"
 mkdir /xray
 chmod 777 /xray
-wget https://github.com/XTLS/Xray-core/releases/download/v1.8.23/Xray-linux-64.zip
+wget https://github.com/XTLS/Xray-core/releases/download/v1.8.24/Xray-linux-64.zip
 unzip Xray-linux-64.zip -d /xray
 cp /xray/xray /usr/bin/xray
 id=`xray uuid`
