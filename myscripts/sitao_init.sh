@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # .bashrc CONFIG
-echo 'export PS1="[\u@\h \w ]# "' >> ~/.bashrc
+echo 'export PS1="[\u@\h \w ]% "' >> ~/.bashrc
 echo "export LS_OPTIONS='--color=auto'" >> ~/.bashrc
 echo "alias ls='ls $LS_OPTIONS'" >> ~/.bashrc
 echo "alias ll='ls $LS_OPTIONS -lh'" >> ~/.bashrc
