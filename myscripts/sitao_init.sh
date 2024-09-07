@@ -35,6 +35,7 @@ echo -e "\033[36m SSH配置完成.\033[0m"
 
 bash -c 'source ~/.bashrc; echo -e "\033[36mDone.\033[0m"'
 echo
+
 for i in {3..1}; do
     echo -ne "系统将在 $i 秒后重启...\r"
     sleep 1
