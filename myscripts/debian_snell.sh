@@ -21,8 +21,6 @@ Description=Snell Proxy Service
 After=network.target
 
 [Service]
-User=nobody
-Group=nogroup
 ExecStart=/usr/local/snell/snell-server -c /usr/local/snell/snell-server.conf
 
 [Install]
