@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Nginx中 alias 与 root 的区别</title>
+      <link href="/uncategorized/nginx-root-and-alias.html"/>
+      <url>/uncategorized/nginx-root-and-alias.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="alias-vs-root"><a href="#alias-vs-root" class="headerlink" title="alias vs root"></a>alias vs root</h2><h3 id="1-alias"><a href="#1-alias" class="headerlink" title="1. alias"></a>1. alias</h3><ul><li><strong>定义</strong>：<code>alias</code>指令用于指定一个绝对路径或者相对于 <code>root</code>指令的路径，它会直接指向文件系统中的某个位置。</li><li><strong>用途</strong>：当你需要精确地指向一个特定的目录或文件时使用。</li><li><strong>示例</strong>：<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /images/ &#123;</span><br><span class="line">    <span class="attribute">alias</span> /data/images/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="2-root"><a href="#2-root" class="headerlink" title="2.root"></a>2.root</h3><ul><li><strong>定义：</strong>root指令设置了一个基准目录，之后所有通过URL访问的文件都相对于这个基准目录查找。</li><li><strong>用途：</strong>通常用于设置站点的根目录。</li><li><strong>示例：</strong></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    # 当请求 /index.html 时，Nginx 将会在 /var/www/html/index.html 下查找文件</span><br></pre></td></tr></table></figure><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>alias后面跟的是文件或目录的实际存放路径；而root后面跟的是站点的根目录。<br>使用alias时，如果URL路径中有其他字符（如斜杠），则可能需要额外处理这些字符。<br>如果希望在URL中包含路径片段并直接映射到文件系统中的对应路径，则应使用alias；如果希望所有的请求都相对于一个固定的目录进行解析，则应该使用root。</p><p>示例</p><p>假设我们有如下文件结构：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/web</span><br><span class="line">  /public_html</span><br><span class="line">    index.html</span><br><span class="line">  /images</span><br><span class="line">    logo.png</span><br></pre></td></tr></table></figure><p>如果我们要配置Nginx来正确处理这个结构，可以这样做：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  listen 80;</span><br><span class="line">  server_name example.com;</span><br><span class="line">  root /web/public_html;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        index index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /images/ &#123;</span><br><span class="line">        alias /web/images/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在这个例子中，root设置了站点的主要文档目录，而alias则指定了&#x2F;images&#x2F;下的所有请求都直接指向&#x2F;web&#x2F;images&#x2F;目录。</p><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>理解alias和root指令的工作方式对于正确配置Nginx以满足不同的服务需求是非常关键的。选择正确的指令可以帮助你更好地管理Nginx的静态内容，并确保服务器能够高效地响应客户端请求。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VPS 使用 ramDebian 手动构建Debian 12</title>
       <link href="/Linux/ramDebian-install-Debian-12.html"/>
       <url>/Linux/ramDebian-install-Debian-12.html</url>

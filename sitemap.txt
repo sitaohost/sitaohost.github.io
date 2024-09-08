@@ -1,3 +1,4 @@
+https://sitao.org/uncategorized/nginx-root-and-alias.html
 https://sitao.org/Linux/archlinux-install-2.html
 https://sitao.org/Linux/ramDebian-install-Debian-12.html
 https://sitao.org/Linux/ramDebian.html
@@ -64,6 +65,7 @@ https://sitao.org/tags/Python/
 https://sitao.org/tags/Debian/
 https://sitao.org/tags/iRedMail/
 https://sitao.org/tags/shell/
+https://sitao.org/tags/nginx/
 https://sitao.org/categories/Linux/
 https://sitao.org/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/
 https://sitao.org/categories/VPS/
