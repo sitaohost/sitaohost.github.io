@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+echo "开始编译安装Python3.12.5"
+
+apt update 
+apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev libbz2-dev pkg-config liblzma-dev sqlite3 tk-dev uuid-dev libgdbm-compat-dev -y
+
+wget https://www.python.org/ftp/python/3.12.5/Python-3.12.5.tar.xz
+tar -xvf Python-3.12.5.tar.xz
+cd Python-3.12.5
+
+./configure --enable-optimizations --prefix=/usr/local/python3
+make -j$(nproc) && make install
+echo "PATH=\$PATH:/usr/local/python3/bin" >> ~/.bashrc
+source ~/.bashrc
+
+python3 --version
