@@ -284,19 +284,19 @@ d-i partman-auto/method string regular
 d-i partman-lvm/device_remove_lvm boolean true
 d-i partman-md/device_remove_md boolean true
 d-i partman-basicfilesystems/no_swap boolean false
-d-i partman-auto/expert_recipe string                       \
-200 1 200 ext4 \
-        $primary&#123; &#125; $bootable&#123; &#125; \
-        method&#123; format &#125; format&#123; &#125; \
-        use_filesystem&#123; &#125; filesystem&#123; ext4 &#125; \
-        mountpoint&#123; /boot &#125; \
-    . \
-201 2 -1 ext4 \
-        $primary&#123; &#125; \
-        method&#123; format &#125; format&#123; &#125; \
-        use_filesystem&#123; &#125; filesystem&#123; ext4 &#125; \
-        mountpoint&#123; / &#125; \
-    .
+d-i partman-auto/expert_recipe string
+200 1 200 ext4
+$primary&#123; &#125; $bootable&#123; &#125; 
+method&#123; format &#125; format&#123; &#125;
+use_filesystem&#123; &#125; filesystem&#123; ext4 &#125;
+mountpoint&#123; /boot &#125;
+.
+201 2 -1 ext4
+$primary&#123; &#125;
+method&#123; format &#125; format&#123; &#125;
+use_filesystem&#123; &#125; filesystem&#123; ext4 &#125;
+mountpoint&#123; / &#125;
+.
 d-i partman-md/confirm_nooverwrite boolean true
 d-i partman-lvm/confirm_nooverwrite boolean true
 d-i partman/confirm_write_new_label boolean true
@@ -310,7 +310,7 @@ d-i apt-setup/services-select multiselect
 d-i grub-installer/grub2_instead_of_grub_legacy boolean true
 d-i grub-installer/only_debian boolean true
 d-i grub-installer/bootdev string /dev/[sv]da
-d-i preseed/late_command string \
+d-i preseed/late_command string
 chroot /target sed -i &#39;s/#PermitRootLogin prohibit-password/PermitRootLogin yes/&#39; /etc/ssh/sshd_config;
 d-i finish-install/reboot_in_progress note
 </code></pre>
