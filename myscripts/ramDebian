@@ -23,7 +23,7 @@ if [ -n "$is_dhcp" ]; then
     cat << EOF >> /etc/grub.d/40_custom
 menuentry "Sitao ramDebian ISO" {
     set root=(hd0,$partitionr_root_number)
-    set isofile="/iso/ramDebian_latest.iso"
+    set isofile="/iso/ramDebian_v3.1_latest.iso"
     loopback loop \$isofile
     echo "Starting \$isofile..."
     linux (loop)/boot/vmlinuz iso_dev=$root_device iso_name=\$isofile network=dhcp
@@ -58,4 +58,6 @@ fi
 # 更新GRUB配置
 sed -i 's/^GRUB_DEFAULT=.*/GRUB_DEFAULT=2/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
+#grub2-mkconfig -o /boot/grub2/grub.cfg
+
 reboot
