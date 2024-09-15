@@ -2,7 +2,7 @@
 
 # 创建目录并下载ISO
 mkdir -p /iso && cd /iso
-wget https://dl.sitao.org/ramDebian/ramDebian_v3.0_latest.iso
+wget https://dl.sitao.org/ramDebian/ramDebian_v3.1_latest.iso
 
 # 获取根目录的设备号
 root_device=$(df / | awk 'NR==2 {print $1}')
