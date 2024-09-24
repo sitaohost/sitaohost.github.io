@@ -1,3 +1,4 @@
+https://sitao.org/pages/good_sentences.html
 https://sitao.org/Linux/ramDebian.html
 https://sitao.org/uncategorized/nginx-root-and-alias.html
 https://sitao.org/Linux/archlinux-install-2.html
@@ -11,7 +12,6 @@ https://sitao.org/uncategorized/arch-python3-install.html
 https://sitao.org/uncategorized/shell-string-operation.html
 https://sitao.org/Linux/archlinux-install-1.html
 https://sitao.org/Linux/archlinux-install-3.html
-https://sitao.org/pages/good_sentences.html
 https://sitao.org/%E5%88%86%E4%BA%AB/PyCharmTo2099.html
 https://sitao.org/VPS/installDebian.html
 https://sitao.org/Linux/alist.html
