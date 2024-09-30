@@ -277,7 +277,7 @@ systemctl daemon-reload
 systemctl enable xray.service
 systemctl start xray.service
 
-cat << EOF > /xray/node
+cat << EOF > /usr/local/xray/node
 ip: `curl ip.sb -4`
 端口: $port
 用户id: $id
@@ -292,21 +292,21 @@ Publickey:$Publickey
 ShortId: 1153456789abcdef (客户端可用的 shortId 列表，可用于区分不同的客户端，可留空，想自定义需自行修改配置文件/xray/config然后重启xray)
 SpiderX ：留空
 EOF
-echo $Privatekey > /xray/Privatekey
+echo $Privatekey > /usr/local/xray/Privatekey
 
 clear
 echo "安装完成！"
 echo "以下的信息能帮助你在客户端添加该节点"
 echo 
-cat /xray/node
+cat /usr/local/xray/node
 echo
 echo
-echo "之后可以执行cat /xray/node 命令查看节点信息，cat /xray/Privatekey查看私钥"
+echo "之后可以执行cat /usr/local/xray/node 命令查看节点信息，cat /xray/Privatekey查看私钥"
 echo
 echo "vless://${id}@`curl ip.sb -4`:$port?encryption=none&flow=xtls-rprx-vision&security=reality&sni=$domain&fp=chrome&pbk=$Publickey&sid=1153456789abcdef&type=tcp&headerType=none#Reality+Vision" > /xray/example_node
 echo
 echo "可以直接使用下面的示例链接"
-cat /xray/example_node
+cat /usr/local/xray/example_node
 echo
 echo "感谢使用"
 rm -rf ~/Xray-linux-64.zip 
