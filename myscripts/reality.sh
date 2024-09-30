@@ -89,7 +89,7 @@ fi
 
 
 echo "安装Xray，版本：1.8.24"
-seradd -s /sbin/nologin xray
+useradd -s /sbin/nologin xray
 mkdir /usr/local/xray
 wget https://github.com/XTLS/Xray-core/releases/download/v1.8.24/Xray-linux-64.zip
 apt install unzip -y
