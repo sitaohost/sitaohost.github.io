@@ -135,17 +135,17 @@ then
 #申请证书
 echo "开始申请证书"
 apt update
-mkdir -p /xray/tls
-chmod 777 /xray/tls
+mkdir -p /usr/local/xray/tls
+chmod 777 /usr/local/xray/tls
 curl https://get.acme.sh | sh
 ln -s  /root/.acme.sh/acme.sh /usr/local/bin/acme.sh
 source ~/.bashrc
 acme.sh --set-default-ca --server letsencrypt
 acme.sh --issue -d $domain --standalone -k ec-256 --force
-acme.sh --installcert -d $domain --ecc  --key-file   /xray/tls/server.key   --fullchain-file /xray/tls/server.crt
+acme.sh --installcert -d $domain --ecc  --key-file   /usr/local/xray/tls/server.key   --fullchain-file /usr/local/xray/tls/server.crt
 acme.sh --upgrade --auto-upgrade
 
-if `test -s /xray/tls/server.crt` 
+if `test -s /usr/local/xray/tls/server.crt` 
   then 
         echo -e "证书申请成功!\n"
         echo -n "证书路径:"
@@ -189,7 +189,7 @@ systemctl daemon-reload
 systemctl enable nginx
 systemctl restart nginx
 
-cat << EOF > /xray/config.json
+cat << EOF > /usr/local/xray/config.json
 {
 	"inbounds": [{
 		"listen": "0.0.0.0",
@@ -232,7 +232,7 @@ EOF
 #偷别人
 else 
 echo "无需安装nginx"
-cat << EOF > /xray/config.json
+cat << EOF > /usr/local/xray/config.json
 {
 	"inbounds": [{
 		"listen": "0.0.0.0",
@@ -301,9 +301,9 @@ echo
 cat /usr/local/xray/node
 echo
 echo
-echo "之后可以执行cat /usr/local/xray/node 命令查看节点信息，cat /xray/Privatekey查看私钥"
+echo "之后可以执行cat /usr/local/xray/node 命令查看节点信息，cat /usr/local/xray/Privatekey查看私钥"
 echo
-echo "vless://${id}@`curl ip.sb -4`:$port?encryption=none&flow=xtls-rprx-vision&security=reality&sni=$domain&fp=chrome&pbk=$Publickey&sid=1153456789abcdef&type=tcp&headerType=none#Reality+Vision" > /xray/example_node
+echo "vless://${id}@`curl ip.sb -4`:$port?encryption=none&flow=xtls-rprx-vision&security=reality&sni=$domain&fp=chrome&pbk=$Publickey&sid=1153456789abcdef&type=tcp&headerType=none#Reality+Vision" > /usr/local/xray/example_node
 echo
 echo "可以直接使用下面的示例链接"
 cat /usr/local/xray/example_node
