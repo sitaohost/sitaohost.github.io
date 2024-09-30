@@ -89,11 +89,15 @@ fi
 
 
 echo "安装Xray，版本：1.8.24"
-mkdir /xray
-chmod 777 /xray
+seradd -s /sbin/nologin xray
+mkdir /usr/local/xray
 wget https://github.com/XTLS/Xray-core/releases/download/v1.8.24/Xray-linux-64.zip
-unzip Xray-linux-64.zip -d /xray
-cp /xray/xray /usr/bin/xray
+apt install unzip -y
+unzip Xray-linux-64.zip -d /usr/local/xray
+mkdir -p /usr/local/xray/tls
+chown -R xray:xray /usr/local/xray
+ln -s /usr/local/xray/xray /usr/bin/xray
+
 id=`xray uuid`
 output=$(xray x25519)
 # 提取 Private key 和 Public key
@@ -104,17 +108,12 @@ cat << EOF > /etc/systemd/system/xray.service
 [Unit]
 Description=Xray Service
 Documentation=https://github.com/xtls
-After=network.target nss-lookup.target
+After=network.target
+
 [Service]
-User=nobody
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/xray/xray run -config /xray/config.json
-Restart=on-failure
-RestartPreventExitStatus=23
-LimitNPROC=10000
-LimitNOFILE=1000000
+User=xray
+ExecStart=/usr/local/xray/xray run -config /usr/local/xray/config.json
+
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -186,6 +185,7 @@ server {
     ssl_prefer_server_ciphers on;
 }
 EOF
+systemctl daemon-reload
 systemctl enable nginx
 systemctl restart nginx
 
@@ -273,7 +273,7 @@ cat << EOF > /xray/config.json
 }
 EOF
 fi
-
+systemctl daemon-reload
 systemctl enable xray.service
 systemctl start xray.service
 
