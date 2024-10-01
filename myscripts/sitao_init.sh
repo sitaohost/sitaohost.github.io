@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 # .bashrc CONFIG
-echo 'export PS1="[\u@\h \w ]% "' >> ~/.bashrc
-echo "export LS_OPTIONS='--color=auto'" >> ~/.bashrc
-echo "alias ls='ls $LS_OPTIONS'" >> ~/.bashrc
-echo "alias ll='ls $LS_OPTIONS -lh'" >> ~/.bashrc
+echo 'export PS1="\u@\h:[ \033[36m\w\033[0m ]% "' >> ~/.bashrc
+echo "alias ls='ls --color=auto'" >> ~/.bashrc
+echo "alias ll='ls --color=auto -lh'" >> ~/.bashrc
 echo "export VISUAL=vim" >> ~/.bashrc
 echo -e "\033[36m .bashrc配置完成.\033[0m"
 
