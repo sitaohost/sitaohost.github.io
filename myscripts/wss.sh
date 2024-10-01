@@ -23,7 +23,7 @@ ExecStart=/usr/local/xray/xray run -config /usr/local/xray/config.json
 WantedBy=multi-user.target
 EOF
 
-cat << EOF > /usr/local/xray/xray/config.json
+cat << EOF > /usr/local/xray/config.json
 {
    
 "inbounds": [
