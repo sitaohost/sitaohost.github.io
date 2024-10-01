@@ -2,7 +2,7 @@
 
 mkdir /xray
 chmod 777 /xray
-wget https://github.com/XTLS/Xray-core/releases/download/v1.8.10/Xray-linux-64.zip
+wget https://github.com/XTLS/Xray-core/releases/download/v1.8.24/Xray-linux-64.zip
 apt-get install unzip -y
 unzip Xray-linux-64.zip -d /xray
 cp /xray/xray /usr/bin/xray
