@@ -2,7 +2,7 @@
 
 # 创建目录并下载ISO
 mkdir -p /iso && cd /iso
-wget https://dl.sitao.org/ramDebian/ramDebian_v3.1_latest.iso
+wget https://dl.sitao.org/ramDebian/ramDebian_v3.2_latest.iso
 
 # 获取根目录的设备号
 root_device=$(df / | awk 'NR==2 {print $1}')
@@ -23,7 +23,7 @@ if [ -n "$is_dhcp" ]; then
     cat << EOF >> /etc/grub.d/40_custom
 menuentry "Sitao ramDebian ISO" {
     set root=(hd0,$partitionr_root_number)
-    set isofile="/iso/ramDebian_v3.1_latest.iso"
+    set isofile="/iso/ramDebian_v3.2_latest.iso"
     loopback loop \$isofile
     echo "Starting \$isofile..."
     linux (loop)/boot/vmlinuz iso_dev=$root_device iso_name=\$isofile network=dhcp
@@ -45,7 +45,7 @@ else
     cat << EOF >> /etc/grub.d/40_custom
 menuentry "Sitao ramDebian ISO" {
     set root=(hd0,$partitionr_root_number)
-    set isofile="/iso/ramDebian_v3.1_latest.iso"
+    set isofile="/iso/ramDebian_v3.2_latest.iso"
     loopback loop \$isofile
     echo "Starting \$isofile..."
     linux (loop)/boot/vmlinuz iso_dev=$root_device iso_name=\$isofile network=static ip_address=$ip_address ip_netmask=$ip_netmask gateway=$gateway
