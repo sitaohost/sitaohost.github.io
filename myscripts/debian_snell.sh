@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-wget https://dl.nssurge.com/snell/snell-server-v4.1.0-linux-amd64.zip
+wget https://dl.nssurge.com/snell/snell-server-v4.1.1-linux-amd64.zip
 mkdir -p /usr/local/snell
 apt install unzip -y
 unzip snell-server-v4.1.0-linux-amd64.zip
