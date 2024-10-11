@@ -2,7 +2,6 @@
 
 wget https://dl.nssurge.com/snell/snell-server-v4.1.1-linux-amd64.zip
 mkdir -p /usr/local/snell
-apt install unzip -y
 unzip snell-server-v4.1.0-linux-amd64.zip
 mv snell-server /usr/local/snell
 chmod +x /usr/local/snell/snell-server
@@ -28,6 +27,8 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
+restorecon -Rv /usr/local/snell/
+
 systemctl enable snell
 systemctl start snell
 systemctl status snell
