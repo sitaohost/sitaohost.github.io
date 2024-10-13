@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>TCP 和 UDP 的连接方式与差异解析 | Sitao</title><meta name="keywords" content="Sitao,Linux"><meta name="author" content="Sitao"><meta name="copyright" content="Sitao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="TCP 和 UDP 的连接方式与差异解析"><meta name="application-name" content="TCP 和 UDP 的连接方式与差异解析"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="TCP 和 UDP 的连接方式与差异解析"><meta property="og:url" content="https://sitao.org/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp-and-udp.html"><meta property="og:site_name" content="Sitao"><meta property="og:description" content="在网络编程中,TCP 和 UDP 是最常用的传输层协议。它们之间的连接方式和使用场景存在明显差异。本文将详细解析 TCP 和 UDP 的原理，并通过 Python 代码示例加深理解。  1. TCP 和 UDP 的基本特性   特性 TCP（Transmission Control Protocol"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://sitao.org/img/photo.jpeg"><meta property="article:author" content="Sitao"><meta property="article:tag" content="Sitao,Linux"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://sitao.org/img/photo.jpeg"><meta name="description" content="在网络编程中,TCP 和 UDP 是最常用的传输层协议。它们之间的连接方式和使用场景存在明显差异。本文将详细解析 TCP 和 UDP 的原理，并通过 Python 代码示例加深理解。  1. TCP 和 UDP 的基本特性   特性 TCP（Transmission Control Protocol"><link rel="shortcut icon" href="/img/photo.ico"><link rel="canonical" href="https://sitao.org/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp-and-udp"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: undefined,
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":["🏃 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Sitao","link":"链接: ","source":"来源: Sitao","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Sitao',
+  title: 'TCP 和 UDP 的连接方式与差异解析',
+  postAI: '',
+  pageFillDescription: '1. TCP 和 UDP 的基本特性, 2. TCP 和 UDP 在 Python 中的连接方式, 2.1 TCP 连接：connect() 方法, TCP 示例代码, 特点：, 2.2 UDP 连接：sendto() 方法, UDP 示例代码, 特点：, 3. 为什么 TCP 使用 connect()而 UDP 使用 sendto()？, 4. TCP 和 UDP 的适用场景, 5. 常见的陷阱与调试方法, 6. 总结, 7. 参考文档在网络编程中和是最常用的传输层协议它们之间的连接方式和使用场景存在明显差异本文将详细解析和的原理并通过代码示例加深理解和的基本特性特性连接方式面向连接三次握手无连接直接传输可靠性可靠传输保证数据顺序和完整性不可靠传输可能丢包或乱序传输状态维护连接状态无状态传输场景文件传输网页加载数据库连接等音视频流查询在线游戏等和在中的连接方式连接方法在中需要使用建立连接此过程会经过三次握手客户端发送包到服务器表示建立连接的请求服务器返回包确认请求客户端返回包连接建立成功示例代码创建建立连接发送数据接收数据关闭连接特点在连接建立成功后可以像文件流一样使用和进行数据传输适合需要高可靠性的数据传输如文件下载或数据库操作连接方法是无连接的协议它不需要建立连接可以直接发送数据包由于没有确认机制所以数据可能会丢失示例代码创建设置超时发送空数据包接收响应关闭连接特点方法每次都需要指定目标地址方法用于接收数据包同时返回数据来源地址适合实时性要求高但可以容忍丢包的场景如音视频流为什么使用而使用的三次握手过程在调用时会发送包触发三次握手建立可靠的连接只有连接建立成功后才能传输数据的无连接特性不需要建立连接直接发送数据包而则尝试接收数据包由于没有状态跟踪无法保证数据是否到达因此适合轻量级和实时传输的场景和的适用场景协议适用场景案例需要可靠传输数据不丢失的场景文件传输数据库连接网页访问允许数据丢失追求实时性的场景实时视频在线游戏查询常见的陷阱与调试方法没有回应的情况数据包可能被丢弃或者对方没有监听特定的端口使用或等抓包工具检查数据包是否成功发送连接超时问题可能是目标服务器没有监听端口或防火墙阻止了连接使用或测试连接是否正常总结适合需要可靠传输的场景如文件下载网页加载适合对实时性要求高但可以容忍丢包的场景如音视频流在线游戏通过上述代码示例和原理解析我们可以看到和的不同之处以及如何在不同场景中选择合适的协议在实践中理解这些差异对于编写网络程序调试网络问题非常重要参考文档官方文档与的区别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-13 16:30:21',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.2.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/photo.jpeg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Sitao</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/pages/good_sentences.html"><span> 好句分享</span></a></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Bandwagon/" style="font-size: 1.05rem;">Bandwagon<sup>2</sup></a><a href="/tags/DMIT/" style="font-size: 1.05rem;">DMIT<sup>2</sup></a><a href="/tags/Debian/" style="font-size: 1.05rem;">Debian<sup>2</sup></a><a href="/tags/HK/" style="font-size: 1.05rem;">HK<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>7</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>1</sup></a><a href="/tags/VPS/" style="font-size: 1.05rem;">VPS<sup>2</sup></a><a href="/tags/archlinux/" style="font-size: 1.05rem;">archlinux<sup>4</sup></a><a href="/tags/iRedMail/" style="font-size: 1.05rem;">iRedMail<sup>1</sup></a><a href="/tags/nginx/" style="font-size: 1.05rem;">nginx<sup>1</sup></a><a href="/tags/shell/" style="font-size: 1.05rem;">shell<sup>1</sup></a><a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" style="font-size: 1.05rem;">编译安装<sup>5</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url">计算机网络</a></span><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">TCP 和 UDP 的连接方式与差异解析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-10-13T08:18:10.000Z" title="发表于 2024-10-13 16:18:10">2024-10-13</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-10-13T08:30:21.632Z" title="更新于 2024-10-13 16:30:21">2024-10-13</time></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://sitao.org/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp-and-udp.html"><header><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url">计算机网络</a><h1 id="CrawlerTitle" itemprop="name headline">TCP 和 UDP 的连接方式与差异解析</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Sitao</span><time itemprop="dateCreated datePublished" datetime="2024-10-13T08:18:10.000Z" title="发表于 2024-10-13 16:18:10">2024-10-13</time><time itemprop="dateCreated datePublished" datetime="2024-10-13T08:30:21.632Z" title="更新于 2024-10-13 16:30:21">2024-10-13</time></header><p>在网络编程中,TCP 和 UDP 是最常用的传输层协议。它们之间的连接方式和使用场景存在明显差异。本文将详细解析 TCP 和 UDP 的原理，并通过 Python 代码示例加深理解。</p>
+<hr>
+<h2 id="1-TCP-和-UDP-的基本特性"><a href="#1-TCP-和-UDP-的基本特性" class="headerlink" title="1. TCP 和 UDP 的基本特性"></a><strong>1. TCP 和 UDP 的基本特性</strong></h2><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>TCP（Transmission Control Protocol）</strong></th>
+<th><strong>UDP（User Datagram Protocol）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>连接方式</strong></td>
+<td>面向连接（三次握手）</td>
+<td>无连接（直接传输）</td>
+</tr>
+<tr>
+<td><strong>可靠性</strong></td>
+<td>可靠传输，保证数据顺序和完整性</td>
+<td>不可靠传输，可能丢包或乱序</td>
+</tr>
+<tr>
+<td><strong>传输状态</strong></td>
+<td>维护连接状态</td>
+<td>无状态</td>
+</tr>
+<tr>
+<td><strong>传输场景</strong></td>
+<td>文件传输、网页加载、数据库连接等</td>
+<td>音视频流、DNS 查询、在线游戏等</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-TCP-和-UDP-在-Python-中的连接方式"><a href="#2-TCP-和-UDP-在-Python-中的连接方式" class="headerlink" title="2. TCP 和 UDP 在 Python 中的连接方式"></a><strong>2. TCP 和 UDP 在 Python 中的连接方式</strong></h2><h3 id="2-1-TCP-连接：connect-方法"><a href="#2-1-TCP-连接：connect-方法" class="headerlink" title="2.1 TCP 连接：connect() 方法"></a><strong>2.1 TCP 连接：<code>connect()</code> 方法</strong></h3><p>在TCP中，需要使用 <code>s.connect()</code>建立连接。此过程会经过三次握手 ：</p>
+<ol>
+<li><strong>客户端</strong> 发送 SYN 包到服务器，表示建立连接的请求。</li>
+<li><strong>服务器</strong> 返回 SYN+ACK 包，确认请求。</li>
+<li><strong>客户端</strong> 返回 ACK 包，连接建立成功。</li>
+</ol>
+<h4 id="TCP-示例代码"><a href="#TCP-示例代码" class="headerlink" title="TCP 示例代码"></a><strong>TCP 示例代码</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 TCP socket</span></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 建立连接</span></span><br><span class="line">    s.connect((<span class="string">&#x27;example.com&#x27;</span>, <span class="number">80</span>))</span><br><span class="line">    <span class="comment"># 发送数据</span></span><br><span class="line">    s.send(<span class="string">b&quot;GET / HTTP/1.1\r\nHost: example.com\r\n\r\n&quot;</span>)</span><br><span class="line">    <span class="comment"># 接收数据</span></span><br><span class="line">    response = s.recv(<span class="number">4096</span>)</span><br><span class="line">    <span class="built_in">print</span>(response.decode())</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="comment"># 关闭连接</span></span><br><span class="line">    s.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点：</strong></h4><ul>
+<li>在连接建立成功后，可以像文件流一样使用 <code>send()</code> 和 <code>recv()</code> 进行数据传输。</li>
+<li>适合需要高可靠性的数据传输，如文件下载或数据库操作。</li>
+</ul>
+<hr>
+<h3 id="2-2-UDP-连接：sendto-方法"><a href="#2-2-UDP-连接：sendto-方法" class="headerlink" title="2.2 UDP 连接：sendto() 方法"></a><strong>2.2 UDP 连接：<code>sendto()</code> 方法</strong></h3><p><strong>UDP</strong> 是无连接的协议，它不需要建立连接，可以直接发送数据包。由于没有确认机制，所以数据可能会丢失。</p>
+<h4 id="UDP-示例代码"><a href="#UDP-示例代码" class="headerlink" title="UDP 示例代码"></a><strong>UDP 示例代码</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 UDP socket</span></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</span><br><span class="line">s.settimeout(<span class="number">3</span>)  <span class="comment"># 设置超时</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 发送空数据包</span></span><br><span class="line">    s.sendto(<span class="string">b&#x27;&#x27;</span>, (<span class="string">&#x27;example.com&#x27;</span>, <span class="number">53</span>))</span><br><span class="line">    <span class="comment"># 接收响应</span></span><br><span class="line">    data, addr = s.recvfrom(<span class="number">1024</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Received from <span class="subst">&#123;addr&#125;</span>: <span class="subst">&#123;data.decode()&#125;</span>&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> socket.timeout:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No response from server.&quot;</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="comment"># 关闭连接</span></span><br><span class="line">    s.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="特点：-1"><a href="#特点：-1" class="headerlink" title="特点："></a><strong>特点：</strong></h4><ul>
+<li><strong><code>sendto()</code></strong> 方法每次都需要指定目标地址。</li>
+<li><strong><code>recvfrom()</code></strong> 方法用于接收数据包，同时返回数据来源地址。</li>
+<li>适合实时性要求高但可以容忍丢包的场景，如音视频流。</li>
+</ul>
+<hr>
+<h2 id="3-为什么-TCP-使用-connect-，而-UDP-使用-sendto-？"><a href="#3-为什么-TCP-使用-connect-，而-UDP-使用-sendto-？" class="headerlink" title="3. 为什么 TCP 使用 connect()，而 UDP 使用 sendto()？"></a><strong>3. 为什么 TCP 使用</strong> <strong><code>connect()</code>，而 UDP 使用</strong> <strong><code>sendto()</code>？</strong></h2><ol>
+<li><strong>TCP 的三次握手过程：</strong><ul>
+<li>在调用 <strong><strong><code>connect()</code></strong> 时，TCP 会发送SYN</strong> 包，触发三次握手，建立可靠的连接。只有连接建立成功后，才能传输数据。</li>
+</ul>
+</li>
+<li><strong>UDP 的无连接特性：</strong><ul>
+<li>UDP 不需要建立连接。<code>sendto()</code>直接发送数据包，而 <code>recvfrom()</code>则尝试接收数据包。</li>
+<li>由于没有状态跟踪，无法保证数据是否到达，因此适合轻量级和实时传输的场景。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="4-TCP-和-UDP-的适用场景"><a href="#4-TCP-和-UDP-的适用场景" class="headerlink" title="4. TCP 和 UDP 的适用场景"></a><strong>4. TCP 和 UDP 的适用场景</strong></h2><table>
+<thead>
+<tr>
+<th><strong>协议</strong></th>
+<th><strong>适用场景</strong></th>
+<th><strong>案例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TCP</td>
+<td>需要可靠传输、数据不丢失的场景</td>
+<td>文件传输、数据库连接、网页访问</td>
+</tr>
+<tr>
+<td>UDP</td>
+<td>允许数据丢失，追求实时性的场景</td>
+<td>实时视频、在线游戏、DNS 查询</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-常见的陷阱与调试方法"><a href="#5-常见的陷阱与调试方法" class="headerlink" title="5. 常见的陷阱与调试方法"></a><strong>5. 常见的陷阱与调试方法</strong></h2><ol>
+<li><strong>UDP 没有回应的情况：</strong><ul>
+<li>UDP 数据包可能被丢弃，或者对方没有监听特定的端口。</li>
+<li>使用 <strong><strong><code>tcpdump</code></strong> 或</strong> <strong>Wireshark</strong> 等抓包工具检查数据包是否成功发送。</li>
+</ul>
+</li>
+<li><strong>TCP 连接超时问题：</strong><ul>
+<li>可能是目标服务器没有监听端口或防火墙阻止了连接。</li>
+<li>使用 <strong><strong><code>telnet</code></strong> 或</strong> <strong><code>tcping</code></strong> 测试连接是否正常。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a><strong>6. 总结</strong></h2><ul>
+<li><strong>TCP</strong> ：适合需要可靠传输的场景，如文件下载、网页加载。</li>
+<li><strong>UDP</strong> ：适合对实时性要求高，但可以容忍丢包的场景，如音视频流、在线游戏。</li>
+</ul>
+<p>通过上述代码示例和原理解析，我们可以看到<strong>TCP</strong>和<strong>UDP</strong> 的不同之处，以及如何在不同场景中选择合适的协议。在实践中，理解这些差异对于编写网络程序、调试网络问题非常重要。</p>
+<hr>
+<h2 id="7-参考文档"><a href="#7-参考文档" class="headerlink" title="7. 参考文档"></a><strong>7. 参考文档</strong></h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/socket.html">Python socket 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP与UDP的区别</a></li>
+</ul>
+</article><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/uncategorized/nginx-root-and-alias.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Nginx中 alias 与 root 的区别</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/photo.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://bu.dusays.com/2021/01/15/b91fc930f3f5f.gif" alt="status"/></div></div><div class="author-info__description">记录和分享折腾经历</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Sitao</h1><div class="author-info__desc">唯实惟新 至诚致志</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="mailto:root@sitao.org" target="_blank" title="Email"><i class="fa-solid fa-envelope faa-tada"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-TCP-%E5%92%8C-UDP-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">1. TCP 和 UDP 的基本特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-TCP-%E5%92%8C-UDP-%E5%9C%A8-Python-%E4%B8%AD%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">2. TCP 和 UDP 在 Python 中的连接方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-TCP-%E8%BF%9E%E6%8E%A5%EF%BC%9Aconnect-%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 TCP 连接：connect() 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">2.1.1.</span> <span class="toc-text">TCP 示例代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">2.1.2.</span> <span class="toc-text">特点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-UDP-%E8%BF%9E%E6%8E%A5%EF%BC%9Asendto-%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 UDP 连接：sendto() 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#UDP-%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.1.</span> <span class="toc-text">UDP 示例代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">特点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%B8%BA%E4%BB%80%E4%B9%88-TCP-%E4%BD%BF%E7%94%A8-connect-%EF%BC%8C%E8%80%8C-UDP-%E4%BD%BF%E7%94%A8-sendto-%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">3. 为什么 TCP 使用 connect()，而 UDP 使用 sendto()？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TCP-%E5%92%8C-UDP-%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">4. TCP 和 UDP 的适用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%B8%B8%E8%A7%81%E7%9A%84%E9%99%B7%E9%98%B1%E4%B8%8E%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">5. 常见的陷阱与调试方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">6. 总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">7.</span> <span class="toc-text">7. 参考文档</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp-and-udp.html" title="TCP 和 UDP 的连接方式与差异解析">TCP 和 UDP 的连接方式与差异解析</a><time datetime="2024-10-13T08:18:10.000Z" title="发表于 2024-10-13 16:18:10">2024-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/nginx-root-and-alias.html" title="Nginx中 alias 与 root 的区别">Nginx中 alias 与 root 的区别</a><time datetime="2024-09-08T14:46:26.000Z" title="发表于 2024-09-08 22:46:26">2024-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/ramDebian-install-Debian-12.html" title="VPS 使用 ramDebian 手动构建Debian 12">VPS 使用 ramDebian 手动构建Debian 12</a><time datetime="2024-08-16T08:23:30.000Z" title="发表于 2024-08-16 16:23:30">2024-08-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/ramDebian.html" title="ramDebian：一款轻量级、灵活的内存操作系统">ramDebian：一款轻量级、灵活的内存操作系统</a><time datetime="2024-08-15T09:55:15.000Z" title="发表于 2024-08-15 17:55:15">2024-08-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/uncategorized/apt-interrupt-fix.html" title="处理意外中断的APT升级">处理意外中断的APT升级</a><time datetime="2024-08-10T05:35:42.000Z" title="发表于 2024-08-10 13:35:42">2024-08-10</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Sitao</div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">7</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/pages/good_sentences.html"><span> 好句分享</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Bandwagon/" style="font-size: 0.88rem;">Bandwagon<sup>2</sup></a><a href="/tags/DMIT/" style="font-size: 0.88rem;">DMIT<sup>2</sup></a><a href="/tags/Debian/" style="font-size: 0.88rem;">Debian<sup>2</sup></a><a href="/tags/HK/" style="font-size: 0.88rem;">HK<sup>7</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>7</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>1</sup></a><a href="/tags/VPS/" style="font-size: 0.88rem;">VPS<sup>2</sup></a><a href="/tags/archlinux/" style="font-size: 0.88rem;">archlinux<sup>4</sup></a><a href="/tags/iRedMail/" style="font-size: 0.88rem;">iRedMail<sup>1</sup></a><a href="/tags/nginx/" style="font-size: 0.88rem;">nginx<sup>1</sup></a><a href="/tags/shell/" style="font-size: 0.88rem;">shell<sup>1</sup></a><a href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" style="font-size: 0.88rem;">编译安装<sup>5</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script async src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
