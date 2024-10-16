@@ -2,7 +2,7 @@
 
 wget https://dl.nssurge.com/snell/snell-server-v4.1.1-linux-amd64.zip
 mkdir -p /usr/local/snell
-unzip snell-server-v4.1.0-linux-amd64.zip
+unzip snell-server-v4.1.1-linux-amd64.zip
 mv snell-server /usr/local/snell
 chmod +x /usr/local/snell/snell-server
 
